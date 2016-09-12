@@ -4,6 +4,6 @@
 	<title>test</title>
 </head>
 <body>	
-	<p>Yolo swag</p>
+	<p>Yolo swaag</p>
 </body>
 </html>
