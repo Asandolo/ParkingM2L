@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>test</title>
-</head>
-<body>	
-	<p>Yolo swaag</p>
-</body>
-</html>
+<?php 
+$titre = "Acceuil";
+include("includes/pages/header.php");
+
+?>
+<button class="btn btn-success"></button>
+
+<?php include("includes/pages/footer.php"); ?>
