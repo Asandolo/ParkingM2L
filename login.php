@@ -1,17 +1,23 @@
 <?php
-  include("includes/function.php")
+  include("includes/function.php");
+  $error= NULL ;
   if(isset($_POST["conect"]))
   {
     $mail= $_POST["mail"];
-    $psw= $_POST["psw"];
+    $psw= hashMdp($_POST["psw"]);
 
-    $request = $bdd->prepare("SELECT mail_membre,psw_membre FROM MEMBRE");
-    $request->execute();
-    while ($request->fetch()) {
-      # code...
+    $request = $bdd->prepare("SELECT mail_membre,psw_membre FROM MEMBRE WHERE mail_membre=?");
+    $request->execute(array($mail));
+    $data = $request->fetch();
+
+    if($psw==$data["psw_membre"])
+    {
+        $error= "okfgjnn";
     }
-    //hashMdp($psw)
-
+    else
+    {
+      $error = "Le mail ou le mot de passe est éroné";
+    }
   }  
 ?>
 
@@ -112,8 +118,14 @@
   <div id="fullscreen_bg" class="fullscreen_bg"/>
 
   <div class="container">
-
-  <form class="form-signin">
+  <center>
+    <span style="color : red;">
+      <?php
+        echo $error;
+      ?>
+    </span>
+  </center>
+  <form class="form-signin" method="POST">
     <h1 class="form-signin-heading text-muted">Connection</h1>
     <input type="text" name="mail" class="form-control" placeholder="Adresse e-mail" required="" autofocus="">
     <input type="password" name="psw" class="form-control" placeholder="Mot de Pass" required="">
