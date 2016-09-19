@@ -52,16 +52,11 @@
    -webkit-outline:0;
    -moz-outline:0;
   }
-  .fullscreen_bg {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-size: cover;
-    background-position: 50% 50%;
+  body {
     background-image: url('http://cleancanvas.herokuapp.com/img/backgrounds/color-splash.jpg');
-    background-repeat:repeat;
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
   }
   .form-signin {
     max-width: 280px;
@@ -115,7 +110,7 @@
   <script type="text/javascript" src="includes/js/bootstrap.js"></script>
 </head>
 <body>
-  <div id="fullscreen_bg" class="fullscreen_bg"/>
+  
 
   <div class="container">
   <center>
@@ -127,22 +122,66 @@
   </center>
   <form class="form-signin" method="POST">
     <h1 class="form-signin-heading text-muted">S'enregistrer</h1>
-    <input type="mail" name="mail" class="form-control" placeholder="Adresse e-mail" required="" autofocus="">
-    <input type="password" name="psw" class="form-control" placeholder="Mot de Pass" required="">
-    <input type="text" name="check_psw" class="form-control" placeholder="Mot de Pass" required="">
-    <input type="password" name="psw" class="form-control" placeholder="Mot de Pass" required="">
-    <input type="password" name="psw" class="form-control" placeholder="Mot de Pass" required="">
-    <input type="password" name="psw" class="form-control" placeholder="Mot de Pass" required="">
-    <input type="password" name="psw" class="form-control" placeholder="Mot de Pass" required="">
-    <input type="password" name="psw" class="form-control" placeholder="Mot de Pass" required="">
-    <input type="password" name="psw" class="form-control" placeholder="Mot de Pass" required="">
-    <input type="password" name="psw" class="form-control" placeholder="Mot de Pass" required="">
-    <input type="password" name="psw" class="form-control" placeholder="Mot de Pass" required="">
-    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Se connecter" name="conect">
+    <input type="mails" name="mail" class="form-control" placeholder="Adresse e-mail" required="" autofocus=""></br>
+    <input type="password" name="psw" class="form-control" placeholder="Mot de Passe" required=""></br>
+    <input type="text" name="check_psw" class="form-control" placeholder="Confirmer mot de passe" required=""></br>
+    <label style="color : #0beee8;"></label><select type="text" name="civilite" class="form-control" placeholder="civilité" required="">
+    <option>
+      mr.
+    </option>
+    <option>
+      Mme.
+    </option>
+    </select></br>
+    <input type="text" name="nom" class="form-control" placeholder="nom" required=""></br>
+    <input type="text" name="prenom" class="form-control" placeholder="Prénom" required=""></br>
+    <label style="color : #0beee8;">Jour</label><select name="jour" class="form-control" required="">
+    <?php
+      for ($i=1;$i<=31;$i++) {
+    ?>
+    <option>
+        <?php
+          echo $i;
+        ?>    
+    </option>
+    <?php
+      }
+    ?>
+    </select>
+    <label style="color : #0beee8;">Mois</label><select name="mois" class="form-control" required="">
+    <?php
+      for ($i=1;$i<=12;$i++) {
+    ?>
+    <option>
+        <?php
+          echo $i;
+        ?>    
+    </option>
+    <?php
+      }
+    ?>
+    </select>
+    <label style="color : #0beee8;">Année</label><select name="annee" class="form-control" required="">
+    <?php
+      for ($i=Date("Y");$i>=1920;$i--) {
+    ?>
+    <option>
+        <?php
+          echo $i;
+        ?>    
+    </option>
+    <?php
+      }
+    ?>
+    </select></br>  
+    <input type="text" name="rue" class="form-control" placeholder="Adresse" required=""></br>
+    <input type="text" name="cp" class="form-control" placeholder="Code Postal" required=""></br>
+    <input type="text" name="ville" class="form-control" placeholder="Ville" required=""></br>
+    <input class="btn btn-lg btn-primary btn-block" type="submit" value="S'enregistrer" name="enregistrer"></br>
   </form>
   <p align="center" >
   <a href="login.php" style="color : #0beee8;">Se connecter</a>
   </p>    
-</div>
+
 </body>
 </html>
