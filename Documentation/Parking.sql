@@ -12,6 +12,8 @@ use Parking;
 
 CREATE TABLE MEMBRE(
         id_membre         Int (11) NOT NULL AUTO_INCREMENT ,
+        mail_mambre       varchar (255) ,
+        psw_membre        varchar (255) ,
         civilite_membre   Varchar (5) ,
         nom_membre        Varchar (30) ,
         prenom_membre     Varchar (30) ,
