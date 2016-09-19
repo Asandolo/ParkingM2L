@@ -3,9 +3,9 @@
 function hashMdp($psw) {
 
 
-	$mot1 = sha1(sha1(md5(sha1(md5(sha1(sha1(sha1(md5("A REMPLIRE")))))))));
+	$mot1 = sha1(sha1(md5(sha1(md5(sha1(sha1(sha1(md5("Yolo")))))))));
 
-	$mot2 = md5(md5(md5(sha1(sha1(sha1(sha1("A REMPLIRE")))))));
+	$mot2 = md5(md5(md5(sha1(sha1(sha1(sha1("Swag")))))));
 
 	$pw = md5(md5(md5(md5(md5(sha1(sha1(md5(md5($psw)))))))));
 
