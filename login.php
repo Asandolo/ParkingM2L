@@ -10,19 +10,26 @@
     $mail= $_POST["mail"];
     $psw= hashMdp($_POST["psw"]);
 
-    $request = $bdd->prepare("SELECT mail_membre,psw_membre FROM MEMBRE WHERE mail_membre=?");
+    $request = $bdd->prepare("SELECT mail_membre,psw_membre,valide_membre FROM MEMBRE WHERE mail_membre=?");
     $request->execute(array($mail));
     $data = $request->fetch();
 
-    if($psw==$data["psw_membre"])
-    {
-        $_SESSION["mail"] = $data["mail_membre"];
-        header('Location: index.php');
+    if ($data["valide_membre"] == 1) {
+      # code...
+      if($psw==$data["psw_membre"])
+      {
+          $_SESSION["mail"] = $data["mail_membre"];
+          header('Location: index.php');
+      }
+      else
+      {
+        $error = "Le mail ou le mot de passe est éroné";
+      }
+
+    }else{
+      $error = "Votre compte n'est pas activé";
     }
-    else
-    {
-      $error = "Le mail ou le mot de passe est éroné";
-    }
+
   }  
 ?>
 

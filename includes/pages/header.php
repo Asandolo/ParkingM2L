@@ -3,7 +3,17 @@ session_start();
 if (!isset($_SESSION["mail"]) ) {
 	header('Location: login.php');
 }
-include("includes/function.php")
+include("includes/function.php");
+
+
+$req_user = $bdd->prepare("SELECT * FROM `membre` WHERE `mail_membre` = ?");
+$req_user->execute(array($_SESSION["mail"]));
+$user = $req_user->fetch();
+
+if ($user["valide_membre"] == 0) {
+  header('Location: logout.php');
+}
+
  ?>
 <!DOCTYPE html>
 <html>
@@ -23,7 +33,7 @@ include("includes/function.php")
 	<div class="col-sm-3">		
 	</div>
 	<div class="col-sm-9" style="height:100px; margin-top:10px" >
-		<p>Jean Bon</p>
+		<p><?php echo $user["nom_membre"]." ".$user["prenom_membre"]; ?></p>
 	</div>
 </div>
 <div class="row">
@@ -37,15 +47,27 @@ include("includes/function.php")
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <span class="visible-xs navbar-brand">Sidebar menu</span>
+          <span class="visible-xs navbar-brand">Parking M2L</span>
         </div>
         <div class="navbar-collapse collapse sidebar-navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Menu Item 1</a></li>
+            <strong><p>Menu Utilisateur</p></strong>
+            <li><a href="#">Menu Item 1</a></li>
+            <li><a href="#">Menu Item 2</a></li>
+            <li><a href="#">Menu Item 3</a></li>
+            <li><a href="#"><?php echo "Admin = ".$user["admin_membre"]; ?></a></li>
+            <?php 
+
+            if ($user["admin_membre"] == 1) {
+              ?>
+            <br />
+            <strong><p>Menu Administrateur</p></strong>
+            <li><a href="#">Menu Item 1</a></li>
             <li><a href="#">Menu Item 2</a></li>
             <li><a href="#">Menu Item 3</a></li>
             <li><a href="#">Menu Item 4</a></li>
-            <li><a href="#">Reviews <span class="badge">1,118</span></a></li>
+              <?php } ?>
+            <li><a style="color:red;" href="logout.php">Déconnexion</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
