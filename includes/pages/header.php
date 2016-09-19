@@ -17,12 +17,12 @@ include("includes/function.php")
 	<script type="text/javascript" src="includes/js/jq.js"></script>
 	<script type="text/javascript" src="includes/js/bootstrap.js"></script>
 </head>
-<body>
+<body style="color:#eee">
 <div class="container">
 <div class="row">
 	<div class="col-sm-3">		
 	</div>
-	<div class="col-sm-9" style="height:100px">
+	<div class="col-sm-9" style="height:100px; margin-top:10px" >
 		<p>Jean Bon</p>
 	</div>
 </div>
