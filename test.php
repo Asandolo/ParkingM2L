@@ -1,4 +1,4 @@
 <?php
-include('includes/function/hash.php');
+include('includes/function.php');
 echo hashmdp($_GET["m"]);
  ?>
