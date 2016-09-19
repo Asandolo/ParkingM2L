@@ -1,4 +1,8 @@
 <?php
+  session_start();
+  if (isset($_SESSION["mail"])) {
+    header('Location: index.php');
+  }
   include("includes/function.php");
   $error= NULL ;
   if(isset($_POST["conect"]))
@@ -12,7 +16,8 @@
 
     if($psw==$data["psw_membre"])
     {
-        $error= "okfgjnn";
+        $_SESSION["mail"] = $data["mail_membre"];
+        header('Location: index.php');
     }
     else
     {
