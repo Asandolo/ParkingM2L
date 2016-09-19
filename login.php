@@ -1,7 +1,17 @@
 <?php
+  include("includes/function.php")
   if(isset($_POST["conect"]))
   {
-    echo "yolo";
+    $mail= $_POST["mail"];
+    $psw= $_POST["psw"];
+
+    $request = $bdd->prepare("SELECT mail_membre,psw_membre FROM MEMBRE");
+    $request->execute();
+    while ($request->fetch()) {
+      # code...
+    }
+    //hashMdp($psw)
+
   }  
 ?>
 
@@ -105,8 +115,8 @@
 
   <form class="form-signin">
     <h1 class="form-signin-heading text-muted">Connection</h1>
-    <input type="text" name="" class="form-control" placeholder="Adresse e-mail" required="" autofocus="">
-    <input type="password" class="form-control" placeholder="Mot de Pass" required="">
+    <input type="text" name="mail" class="form-control" placeholder="Adresse e-mail" required="" autofocus="">
+    <input type="password" name="psw" class="form-control" placeholder="Mot de Pass" required="">
     <input class="btn btn-lg btn-primary btn-block" type="submit" value="Se connecter" name="conect">
   </form>    
 </div>
