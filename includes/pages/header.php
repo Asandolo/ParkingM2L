@@ -33,7 +33,7 @@ if ($user["valide_membre"] == 0) {
 	<div class="col-sm-3">		
 	</div>
 	<div class="col-sm-9" style="height:100px; margin-top:10px" >
-		<p><?php echo $user["nom_membre"]." ".$user["prenom_membre"]; ?></p>
+		<p class="info"><?php echo "#".$user["id_membre"]." ".$user["nom_membre"]." ".$user["prenom_membre"]; ?></p>
 	</div>
 </div>
 <div class="row">
@@ -42,7 +42,7 @@ if ($user["valide_membre"] == 0) {
       <div class="navbar navbar-inverse" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">Parking M2L</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
