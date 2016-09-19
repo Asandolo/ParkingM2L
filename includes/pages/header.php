@@ -1,3 +1,6 @@
+<?php
+include("includes/function.php")
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
