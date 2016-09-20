@@ -3,13 +3,9 @@
 function hashMdp($psw) {
 
 
-	$mot1 = sha1(sha1(md5(sha1(md5(sha1(sha1(sha1(md5("A REMPLIRE")))))))));
+// FONCTION MONIMALISTE, prenez contact pour une fonction plus sécurisé
 
-	$mot2 = md5(md5(md5(sha1(sha1(sha1(sha1("A REMPLIRE")))))));
-
-	$pw = md5(md5(md5(md5(md5(sha1(sha1(md5(md5($psw)))))))));
-
-	return $mot1.$pw.$mot2;
+	return md($psw);
 }
 
 
