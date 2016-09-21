@@ -3,7 +3,7 @@
 function hashMdp($psw) {
 
 
-// FONCTION MONIMALISTE, prenez contact pour une fonction plus sécurisé
+// FONCTION MINIMALISTE, prenez contact pour une fonction plus sécurisé
 
 	return md5($psw);
 }
