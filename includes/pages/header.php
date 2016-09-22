@@ -33,7 +33,7 @@ if ($user["valide_membre"] == 0) {
 	<div class="col-sm-3">		
 	</div>
 	<div class="col-sm-9" style="height:100px; margin-top:10px" >
-		<p class="info"><?php echo "#".$user["id_membre"]." ".$user["nom_membre"]." ".$user["prenom_membre"]; ?></p>
+		<p class="info"><?php echo $user["civilite_membre"]." ".strtoupper($user["nom_membre"])." ".$user["prenom_membre"]; ?></p>
 	</div>
 </div>
 <div class="row">
@@ -52,20 +52,20 @@ if ($user["valide_membre"] == 0) {
         <div class="navbar-collapse collapse sidebar-navbar-collapse">
           <ul class="nav navbar-nav">
             <strong><p>Menu Utilisateur</p></strong>
-            <li><a href="#">Menu Item 1</a></li>
-            <li><a href="#">Menu Item 2</a></li>
-            <li><a href="#">Menu Item 3</a></li>
-            <li><a href="#"><?php echo "Admin = ".$user["admin_membre"]; ?></a></li>
+            <li><a href="index.php">Accueil</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="historique.php">Historique de places</a></li>
+            <li><a href="doc.php">Documentation</a></li>
             <?php 
 
             if ($user["admin_membre"] == 1) {
               ?>
             <br />
             <strong><p>Menu Administrateur</p></strong>
-            <li><a href="#">Menu Item 1</a></li>
-            <li><a href="#">Menu Item 2</a></li>
-            <li><a href="#">Menu Item 3</a></li>
-            <li><a href="#">Menu Item 4</a></li>
+            <li><a href="user.php">Utilisateurs</a></li>
+            <li><a href="places.php">Places</a></li>
+            <li><a href="historique_admin.php">Historique</a></li>
+            <li><a href="attente.php">Liste d'attente</a></li>
               <?php } ?>
             <li><a style="color:red;" href="logout.php">Déconnexion</a></li>
           </ul>
