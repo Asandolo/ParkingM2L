@@ -3,6 +3,13 @@ $titre = "Acceuil";
 include("includes/pages/header.php");
 ?>
 
-<p>test</p>
+		<div class="row">
+			<div class="col-md-12 black">
+				<p>ici presentation</p>
+			</div>
+			<div class="col-md-12 black">
+				<p>ici info place</p>
+			</div>
+		</div>
 
 <?php include("includes/pages/footer.php"); ?>
