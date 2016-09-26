@@ -10,7 +10,7 @@ if($c >=10 ){
 }else {
 
 for ($i=1; $i <=10 ; $i++) { 
-	$in = $bdd->prepare("INSERT INTO `place` VALUES('',?);");
+	$in = $bdd->prepare("INSERT INTO `place` (`num_place`) VALUES(?);");
 	$in->execute(array($i));
 	echo "ok".$i."<br />";
 }
