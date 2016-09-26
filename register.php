@@ -1,6 +1,7 @@
 <?php
   include("includes/function.php");
   $error= NULL ;
+  $ok= NULL ;
   if(isset($_POST['enregistrer']))
   {
     $mail = htmlspecialchars($_POST['mail']);
@@ -21,9 +22,10 @@
     $hashpsw = hashMdp($psw);
     
     
-    $verif=$bdd->prepare("SELECT mail_membre FROM MEMBRE WHERE mail_membre=?");
-    $verif->execute(array($mail));
-    $count=$verif->rowCount();
+     $verif=$bdd->prepare("SELECT mail_membre FROM MEMBRE WHERE mail_membre=?");
+     $verif->execute(array($mail));
+     $count=$verif->rowCount();
+
     if($count>0)
     {
       $error = "Adresse e-mail déjà utilisé";
@@ -34,8 +36,20 @@
     }
     else
     {
-      $register=$bdd->prepare("INSERT INTO MEMBRE (mail_membre,psw_membre,civilite_membre,nom_membre,prenom_membre,date_naiss_membr,adRue_membre,adCP_membre,adVille_membre,valide_membre,admin_membre) VALUES (?,?,?,?,?,?,?,?,?,0,0,0)");
-      $register->execute(array($mail,$psw,$civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville));
+
+      $verif->closeCursor();
+
+      $r = $bdd->prepare("INSERT INTO membre (mail_membre) VALUES(?)");
+      $r->execute(array($mail));
+
+
+      echo "<pre>";
+      print_r($r);
+      echo "</pre>";
+
+      $ok = 'ok';
+
+      $bdd = null;
     }
   }  
 ?>
@@ -45,7 +59,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LOGIN</title>
+  <title>REGISTER</title>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="includes/css/bootstrap.css">
   <style type="text/css">
@@ -136,6 +150,11 @@
     <span style="color : red;">
       <?php
         echo $error;
+      ?>
+    </span>    
+    <span style="color : green;">
+      <?php
+        echo $ok;
       ?>
     </span>
   </center>
