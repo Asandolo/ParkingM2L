@@ -33,10 +33,46 @@ if (isset($_POST["repsw"])) {
 }
 
 ?>
-
+<script type="text/javascript">
+	 $(document).ready(function() {
+     $('.edit').editable('ajax.php', {
+         indicator : 'Saving...',
+         tooltip   : 'Click to edit...',
+         submit    : 'ok'
+     });
+ });
+</script>
 		<div class="row">
 			<div class="col-md-12 black">
 				<h2>Votre profil</h2>
+
+
+				<table class="table table-bordered">
+					<tr>
+						<th>Nom</th>
+						<td class="edit" id="<?php echo $user['id_membre'].'/'."nom_membre" ?>"><?php echo $user["nom_membre"]; ?></td>
+					</tr>					
+					<tr>
+						<th>Prenom</th>
+						<td class="edit" id="<?php echo $user['id_membre'].'/'."prenom_membre" ?>"><?php echo $user["prenom_membre"]; ?></td>
+					</tr>
+					<tr>
+						<th>Mail</th>
+						<td class="edit" id="<?php echo $user['id_membre'].'/'."mail_membre" ?>"><?php echo $user["mail_membre"]; ?></td>
+					</tr>
+					<tr>
+						<th>Adresse</th>
+						<td class="edit" id="<?php echo $user['id_membre'].'/'."adRue_membre" ?>"><?php echo $user["adRue_membre"]; ?></td>
+					</tr>
+					<tr>
+						<th>Code Postal</th>
+						<td class="edit" id="<?php echo $user['id_membre'].'/'."adCP_membre" ?>"><?php echo $user["adCP_membre"]; ?></td>
+					</tr>
+					<tr>
+						<th>Ville</th>
+						<td class="edit" id="<?php echo $user['id_membre'].'/'."adVille_membre" ?>"><?php echo $user["adVille_membre"]; ?></td>
+					</tr>
+				</table>
 
 				<hr />
 				<h3>Modification du mot de passe</h3>

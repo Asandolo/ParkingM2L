@@ -25,7 +25,8 @@ if ($user["valide_membre"] == 0) {
 	<link rel="stylesheet" type="text/css" href="includes/css/bootstrap.css">
 
 	<script type="text/javascript" src="includes/js/jq.js"></script>
-	<script type="text/javascript" src="includes/js/bootstrap.js"></script>
+  <script type="text/javascript" src="includes/js/bootstrap.js"></script>
+	<script type="text/javascript" src="includes/js/jquery.jeditable.mini.js"></script>
 </head>
 <body style="color:#eee">
 <div class="container">
