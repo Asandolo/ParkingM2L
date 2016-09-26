@@ -8,7 +8,18 @@ include("includes/pages/header.php");
 				<p>ici presentation</p>
 			</div>
 			<div class="col-md-12 black">
-				<p>ici info place</p>
+				<?php
+
+				$places = $bdd->prepare("SELECT * FROM `reserver` WHERE `id_membre` = ?");
+				$places->execute(array($user["id_membre"]));
+
+				$ajd = date("Y-m-d"); 
+				$ajd = strtotime($ajd);
+
+
+
+				?>
+				<p></p>
 			</div>
 		</div>
 
