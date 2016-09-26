@@ -10,7 +10,7 @@ use parking;
 #------------------------------------------------------------
 
 CREATE TABLE MEMBRE(
-        id_membre         Int NOT NULL ,
+        id_membre         Int NOT NULL AUTO_INCREMENT,
         mail_membre       Varchar (255) ,
         psw_membre        Varchar (255) ,
         civilite_membre   Varchar (5) ,
@@ -33,7 +33,7 @@ CREATE TABLE MEMBRE(
 #------------------------------------------------------------
 
 CREATE TABLE PLACE(
-        id_place  Int NOT NULL ,
+        id_place  Int NOT NULL AUTO_INCREMENT,
         num_place Int ,
         PRIMARY KEY (id_place )
 )ENGINE=InnoDB;
