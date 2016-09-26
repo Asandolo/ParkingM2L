@@ -1,22 +1,41 @@
 <?php
   include("includes/function.php");
   $error= NULL ;
-  if(isset($_POST["conect"]))
+  if(isset($_POST['enregistrer']))
   {
-    $mail= $_POST["mail"];
-    $psw= hashMdp($_POST["psw"]);
+    $mail = htmlspecialchars($_POST['mail']);
+    $psw = htmlspecialchars($_POST['psw']);
+    $ckpsw = htmlspecialchars($_POST['check_psw']);
+    $nom = htmlspecialchars($_POST['nom']);
+    $prenom = htmlspecialchars($_POST['prenom']);
+    $rue = htmlspecialchars($_POST['rue']);
+    $cp = htmlspecialchars($_POST['cp']);
+    $ville = htmlspecialchars($_POST['ville']);
+    $civilite = htmlspecialchars($_POST['civilite']);
+    
+    $jour_naiss = htmlspecialchars($_POST['jour']);
+    $mois_naiss = htmlspecialchars($_POST['mois']);
+    $anne_naiss = htmlspecialchars($_POST['annee']);
 
-    $request = $bdd->prepare("SELECT mail_membre,psw_membre FROM MEMBRE WHERE mail_membre=?");
-    $request->execute(array($mail));
-    $data = $request->fetch();
-
-    if($psw==$data["psw_membre"])
+    $date_naiss = $anne_naiss."-".$mois_naiss."-".$jour_naiss;
+    $hashpsw = hashMdp($psw);
+    
+    
+    $verif=$bdd->prepare("SELECT mail_membre FROM MEMBRE WHERE mail_membre=?");
+    $verif->execute(array($mail));
+    $count=$verif->rowCount();
+    if($count>0)
     {
-        $error= "okfgjnn";
+      $error = "Adresse e-mail déjà utilisé";
+    }
+    elseif ($psw!=$ckpsw) 
+    {
+      $error = "Mot de passe différent de la vérification";
     }
     else
     {
-      $error = "Le mail ou le mot de passe est éroné";
+      $register=$bdd->prepare("INSERT INTO MEMBRE (mail_membre,psw_membre,civilite_membre,nom_membre,prenom_membre,date_naiss_membr,adRue_membre,adCP_membre,adVille_membre,valide_membre,admin_membre) VALUES (?,?,?,?,?,?,?,?,?,0,0,0)");
+      $register->execute(array($mail,$psw,$civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville));
     }
   }  
 ?>
@@ -122,9 +141,9 @@
   </center>
   <form class="form-signin" method="POST">
     <h1 class="form-signin-heading text-muted">S'enregistrer</h1>
-    <input type="mails" name="mail" class="form-control" placeholder="Adresse e-mail" required="" autofocus=""></br>
+    <input type="mail" name="mail" class="form-control" placeholder="Adresse e-mail" required="" autofocus=""></br>
     <input type="password" name="psw" class="form-control" placeholder="Mot de Passe" required=""></br>
-    <input type="text" name="check_psw" class="form-control" placeholder="Confirmer mot de passe" required=""></br>
+    <input type="password" name="check_psw" class="form-control" placeholder="Confirmer mot de passe" required=""></br>
     <label style="color : #0beee8;"></label><select type="text" name="civilite" class="form-control" placeholder="civilité" required="">
     <option>
       mr.
