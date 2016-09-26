@@ -21,8 +21,8 @@ CREATE TABLE MEMBRE(
         adRue_membre      Varchar (100) ,
         adCP_membre       Varchar (5) ,
         adVille_membre    Varchar (50) ,
-        valide_membre     Bool ,
-        admin_membre      Bool ,
+        valide_membre     Boolean ,
+        admin_membre      Boolean ,
         PRIMARY KEY (id_membre )
 )ENGINE=InnoDB;
 
