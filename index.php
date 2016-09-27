@@ -1,6 +1,12 @@
+
 <?php 
 $titre = "Acceuil";
 include("includes/pages/header.php");
+
+if (isset($_POST["reserver"])) {
+	# code de reservation de place
+}
+
 ?>
 
 		<div class="row">
@@ -8,6 +14,7 @@ include("includes/pages/header.php");
 				<p>ici presentation</p>
 			</div>
 			<div class="col-md-12 black">
+				<center>
 				<?php
 				$ajd = date("Y-m-d"); 
 				$tsajd = strtotime($ajd);
@@ -20,16 +27,17 @@ include("includes/pages/header.php");
 				$count = $places->rowCount();
 
 				if ($count<=0 && $user["rang"]<=0) {
-					echo "Vous n'avez aucune place et n'etes pas dans la file d'atente";
+					echo "<p style='font-size:20px'>Vous n'avez aucune place et n'etes pas dans la file d'atente</p>";
+					echo "<form><input class='btn btn-danger' value='Reserver une place' name='reserver' /></form>";
 				}elseif($user["rang"]<=0){
-					echo "Vous avez la place : ".$place["num_place"];
+					echo "<p style='font-size:20px'>Vous avez la place : <br /><strong>".$place["num_place"]."</strong></p>";
 				}else{
-					echo "vous etes rang : ".$user["rang"];
+					echo "<p style='font-size:20px'>Vous avez le rang : <br /><strong>".$user["rang"]."</strong></p>";
 				}
 
 
 				?>
-				<p></p>
+				</center>
 			</div>
 		</div>
 
