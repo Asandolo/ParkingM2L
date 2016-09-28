@@ -17,14 +17,12 @@ include("includes/pages/header.php");
 						$i++;
 					}
 
-
 					$k=1;
-					while($k<=$i)
+					while ($k< $i) 
 					{
 						echo $place[$k];
 					}
-
-
+					
 					$ajd = date("Y-m-d"); 
 					$tsajd = strtotime($ajd);
 
