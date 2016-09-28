@@ -1,7 +1,7 @@
-
 <?php 
 $titre = "Acceuil";
 include("includes/pages/header.php");
+
 
 if (isset($_POST["reserver"])) {
 	# code de reservation de place
