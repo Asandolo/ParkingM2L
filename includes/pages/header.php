@@ -54,7 +54,7 @@ if ($user["valide_membre"] == 0) {
           <ul class="nav navbar-nav">
             <strong><p>Menu Utilisateur</p></strong>
             <li><a href="index.php">Accueil</a></li>
-            <li><a href="profile.php">Profil</a></li>
+            <li><a href="profil.php">Profil</a></li>
             <li><a href="historique.php">Historique de places</a></li>
             <li><a href="doc.php">Documentation</a></li>
             <?php 
