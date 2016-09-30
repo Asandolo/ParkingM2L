@@ -21,11 +21,11 @@ include("includes/pages/header.php");
 
 				$CheckPlace = $bdd->prepare("SELECT num_place FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place AND date_fin_periode>= ? AND date_debut_periode <= ?");
 					$CheckPlace->execute(array($aujourdhui, $aujourdhui));
-				$i = 1;
+				$i = 0;
 				while($donnee = $CheckPlace->fetch())
 				{
 					$place[$i]=$donnee['num_place'];
-					echo $place[$i]."</br>";
+					// echo $place[$i]."</br>";
 					$i++;
 				}
 
@@ -38,42 +38,50 @@ include("includes/pages/header.php");
 				$places = $bdd->prepare("SELECT num_place FROM PLACE");
 				$places->execute();
 				
-				$j = 1;
+				$j = 0;
 				while ($donneeDispo = $places->fetch()) 
 				{
 					$placeDispo[$j] = $donneeDispo['num_place'];
-					echo $placeDispo[$j]."</br>";
+					// echo $placeDispo[$j]."</br>";
 					$j++;
 				}
 
 //----------------------------------------------------------------
 //MAGNIPULATION DES TABLEAUX POUR RESORTIR LES PLACES DISPONIBLES |
 //----------------------------------------------------------------
-				$place[0] = 0;
-				$placeDispo[0]=0;
-				$k=1;
-				$l=1;
-				$trieur = 1;
-				for($k=1;$k<=$i;$k++)
-				{
-					for($l=1;$l<=$j;$l++)
-					{
-						if($place[$l] == $placeDispo[$k])
-						{
-							$placeDispo[$l] = null;
-							for($trieur=$l;$trieur<$l;$trieur++)
-							{
-								$placeDispo[$trieur]=$placeDispo[$trieur+1];
-							}
-						}	
+				// $place[0] = 0;
+				// $placeDispo[0]=0;
+				// $k=1;
+				// $l=1;
+				// $trieur = 1;
+				// for($k=1;$k<=$i;$k++)
+				// {
+				// 	for($l=1;$l<=$j;$l++)
+				// 	{
+				// 		if($place[$l] == $placeDispo[$k])
+				// 		{
+				// 			$placeDispo[$l] = null;
+				// 			for($trieur=$l;$trieur<$l;$trieur++)
+				// 			{
+				// 				$placeDispo[$trieur]=$placeDispo[$trieur+1];
+				// 			}
+				// 		}	
 
+				// 	}
+				// }
+
+
+
+				for ($k=0; $k <=count($place) ; $k++) { 
+					for ($l=0; $i <=count($placeDispo) ; $i++) { 
+						if ($place[$l] == $placeDispo[$k]) {
+							echo $place[$l];
+						}
 					}
 				}
 
 
-
-
-				for($k=1;$k<$j;$k++)
+				for($k=0;$k<$j;$k++)
 				{
 					echo $placeDispo[$k]."</br>";
 				}
