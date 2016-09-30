@@ -49,7 +49,34 @@ include("includes/pages/header.php");
 //----------------------------------------------------------------
 //MAGNIPULATION DES TABLEAUX POUR RESORTIR LES PLACES DISPONIBLES |
 //----------------------------------------------------------------
+				$place[0] = 0;
+				$placeDispo[0]=0;
+				$k=1;
+				$l=1;
+				$trieur = 1;
+				for($k=1;$k<=$i;$k++)
+				{
+					for($l=1;$l<=$j;$l++)
+					{
+						if($place[$l] == $placeDispo[$k])
+						{
+							$placeDispo[$l] = null;
+							for($trieur=$l;$trieur<$l;$trieur++)
+							{
+								$placeDispo[$trieur]=$placeDispo[$trieur+1];
+							}
+						}	
 
+					}
+				}
+
+
+
+
+				for($k=1;$k<$j;$k++)
+				{
+					echo $placeDispo[$k]."</br>";
+				}
 			?>
 		</center>
 		</p>
