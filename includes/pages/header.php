@@ -52,7 +52,7 @@ if ($user["valide_membre"] == 0) {
         </div>
         <div class="navbar-collapse collapse sidebar-navbar-collapse">
           <ul class="nav navbar-nav">
-            <strong><p>Menu Utilisateur</p></strong>
+            <strong><p style="color: #0131B4;">Menu Utilisateur</p></strong>
             <li><a href="index.php">Accueil</a></li>
             <li><a href="profil.php">Profil</a></li>
             <li><a href="historique.php">Historique de places</a></li>
@@ -62,9 +62,9 @@ if ($user["valide_membre"] == 0) {
             if ($user["admin_membre"] == 1) {
               ?>
             <br />
-            <strong><p>Menu Administrateur</p></strong>
+            <strong><p style="color: #0131B4;">Menu Administrateur</p></strong>
             <li><a href="user.php">Utilisateurs</a></li>
-            <li><a href="places.php">Places</a></li>
+            <li><a href="place_admin.php">Places</a></li>
             <li><a href="historique_admin.php">Historique</a></li>
             <li><a href="attente.php">Liste d'attente</a></li>
               <?php } ?>
