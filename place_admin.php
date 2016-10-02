@@ -25,8 +25,6 @@ if ($user["admin_membre"]!=1) {
 			$prems = ($pagea-1)*$nbplaceparpage;
 
 			$splace=$bdd->query("SELECT * FROM `place` ORDER BY `num_place` LIMIT ".$prems.",".$nbplaceparpage."");
-			// $splace->execute(array("0","20"));
-			// $splace->execute();
 			?>
 
 			<ul class="pagination">
