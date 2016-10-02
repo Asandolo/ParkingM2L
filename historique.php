@@ -12,9 +12,9 @@ include("includes/pages/header.php");
 	<p>
 	<center>
 		<?php
-			$aujourdhui = date("y-m-d");
+			$aujourdhui = date("Y-m-d");
 			$tsajd = strtotime($aujourdhui);
-			$historique = $bdd->prepare("SELECT RESERVER.id_membre,RESERVER.id_place,num_place,date_debut_periode,date_fin_periode FROM MEMBRE, PLACE, RESERVER WHERE MEMBRE.id_membre = RESERVER.id_membre AND PLACE.id_place=RESERVER.id_place AND RESERVER.id_membre=? AND RESERVER.date_debut_periode < ? ORDER BY date_fin_periode DESC");
+			$historique = $bdd->prepare("SELECT RESERVER.id_membre,RESERVER.id_place,num_place,date_debut_periode,date_fin_periode FROM MEMBRE, PLACE, RESERVER WHERE MEMBRE.id_membre = RESERVER.id_membre AND PLACE.id_place=RESERVER.id_place AND RESERVER.id_membre=? AND RESERVER.date_debut_periode <= ? ORDER BY date_fin_periode DESC");
 			$historique->execute(array($user['id_membre'],$aujourdhui));
 			?>
 			<table class="table table-bordered">
