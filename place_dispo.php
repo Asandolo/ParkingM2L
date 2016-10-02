@@ -1,18 +1,6 @@
 <?php 
 $titre = "places disponibles";
 include("includes/pages/header.php");
-?>
-
-<div class="row">
-	<div class="col-md-12 black">
-		<p><center>PLACES DISPONNIBLES</center></p>
-	</div>		
-</div>
-<div class="row">
-	<div class="col-md-12 black">
-		<p>
-			<center>
-				<?php
 					if (isset($_POST['reserver'])) 
 					{
 						$aujourdhui = date("y-m-d");
@@ -77,25 +65,26 @@ include("includes/pages/header.php");
 							echo $placeDispo[$k]."</br>";
 						}
 					}
-				?>
-			</center>
-		</p>
-	</div>
-</div>
 
-
-
+?>
 
 <div class="row">
+	<div class="col-md-12 black">
+		<p><center>PLACES DISPONNIBLES</center></p>
+	</div>		
+
+
+ 
 <div class="col-md-12 black">
 	<p>
 	<center>
 		<form method="POST">
-			<label style="color : #0beee8;">Jour</label><select name="jour" required="">
+			DATE DE DEBUT : </br></br>
+			<label style="color : #0beee8;">Jour</label><select name="jour_deb" required="" style="color : black;">
    		 <?php
       		for ($i=1;$i<=31;$i++) {
    		 ?>
-    	<option style="color : black;">
+    	<option>
         	<?php
           		echo $i;
        		 ?>  
@@ -104,7 +93,7 @@ include("includes/pages/header.php");
       		}
    		?>
     	</select>
-    	<label style="color : #0beee8;">Mois</label><select name="mois" required="">
+    	<label style="color : #0beee8;">Mois</label><select name="mois_deb" required="" style="color : black;">
     	<?php
       		for ($i=1;$i<=12;$i++) {
    		?>
@@ -117,7 +106,49 @@ include("includes/pages/header.php");
       		}
     	?>
     	</select>
-    	<label style="color : #0beee8;">Année</label><select name="annee" required="">
+    	<label style="color : #0beee8;">Année</label><select name="annee_deb" required="" style="color : black;">
+    	<?php
+      		for ($i=Date("Y");$i<=Date("Y")+3;$i++) {
+    	?>
+    	<option>
+        	<?php
+         		echo $i;
+        	?>    
+    	</option>
+    	<?php
+      		}
+    	?>
+    	</select></br>
+
+
+    	DATE DE FIN : </br></br>
+			<label style="color : #0beee8;">Jour</label><select name="jour_fin" required="" style="color : black;">
+   		 <?php
+      		for ($i=1;$i<=31;$i++) {
+   		 ?>
+    	<option>
+        	<?php
+          		echo $i;
+       		 ?>  
+    	</option>
+   		<?php
+      		}
+   		?>
+    	</select>
+    	<label style="color : #0beee8;">Mois</label><select name="mois_fin" required="" style="color : black;">
+    	<?php
+      		for ($i=1;$i<=12;$i++) {
+   		?>
+    	<option>
+        <?php
+          	echo $i;
+        ?>    
+    	</option>
+    	<?php
+      		}
+    	?>
+    	</select>
+    	<label style="color : #0beee8;">Année</label><select name="annee_fin" required="" style="color : black;">
     	<?php
       		for ($i=Date("Y");$i<=Date("Y")+3;$i++) {
     	?>
