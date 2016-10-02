@@ -75,6 +75,7 @@ if (isset($_POST["reserver"])) {
 			</table>
 	</center>
 	</p>
+	<a href="historique.php"><button class="btn btn-info">Voir tout l'historique</button></a>
 	</div>
 		</div>
 
