@@ -3,6 +3,18 @@ include("includes/pages/header.php");
 if ($user["admin_membre"]!=1) {
 	header('Location: index.php');
 }
+
+if (isset($_POST["desac"])) {
+
+	$desac = $bdd->prepare("UPDATE `place` SET `active_place` = 0 WHERE `id_place` = ?");
+	$desac->execute(array($_POST["id"]));
+}
+
+
+if (isset($_POST["ac"])) {
+	$ac = $bdd->prepare("UPDATE `place` SET `active_place` = 1 WHERE `id_place` = ?");
+	$ac->execute(array($_POST["id"]));
+}
 ?>
 	<div class="row">
 		<div class="col-md-12 black">
@@ -44,8 +56,8 @@ if ($user["admin_membre"]!=1) {
 				<tr>
 					<td><?php echo $place["id_place"]; ?></td><td><?php echo $place["num_place"]; ?></td><td>
 						<form method="POST">
-							<input type="hidden" name="id" value="<?php echo $id; ?>">
-							<input type="subbmit" name="sup" value="Supprimer" class="btn btn-danger">
+							<input type='hidden' name='id' value='<?php echo $place['id_place']; ?>'>
+							<?php echo ($place["active_place"]==1)?"<input type='submit' name='desac' value='Desactiver' class='btn btn-warning'>":"<input type='submit' name='ac' value='Activer' class='btn btn-success'>";?>
 						</form>
 					</td>
 				</tr>

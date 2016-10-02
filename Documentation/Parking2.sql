@@ -35,6 +35,7 @@ CREATE TABLE MEMBRE(
 CREATE TABLE PLACE(
         id_place  Int NOT NULL AUTO_INCREMENT,
         num_place Int ,
+        active_place Boolean ,
         PRIMARY KEY (id_place )
 )ENGINE=InnoDB;
 
