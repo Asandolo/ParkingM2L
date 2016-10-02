@@ -140,7 +140,7 @@
   <form class="form-signin" method="POST">
     <h1 class="form-signin-heading text-muted">Connection</h1>
     <input type="text" name="mail" class="form-control" placeholder="Adresse e-mail" required="" autofocus="">
-    <input type="password" name="psw" class="form-control" placeholder="Mot de Pass" required="">
+    <input type="password" name="psw" class="form-control" placeholder="Mot de Passe" required="">
     <input class="btn btn-lg btn-primary btn-block" type="submit" value="Se connecter" name="conect">
   </form>
   <p align="center" >
