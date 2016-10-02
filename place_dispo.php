@@ -70,6 +70,10 @@ include("includes/pages/header.php");
 				// 	}
 				// }
 
+				//La fonction que tu cherchais
+				if(empty($place)){
+					echo "VIIIIIIIIIIIIIIIIDE";
+				}
 
 
 				for ($k=0; $k <=count($place)-1 ; $k++) 

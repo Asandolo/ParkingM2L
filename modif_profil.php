@@ -33,8 +33,8 @@ if (isset($_POST["updateprofil"])) {
 					<tr>
 						<th>Civilite</th>
 						<td><select name="civilite">
-							<option style="color: black;" <?php echo ($user["civilite_membre"]=="mr.")?"selected=''":""; ?>>
-								mr.
+							<option style="color: black;" <?php echo ($user["civilite_membre"]=="mr." || $user["civilite_membre"]=="Mr.")?"selected=''":""; ?>>
+								Mr.
 							</option>
 							<option style="color: black;" <?php echo ($user["civilite_membre"]=="Mme.")?"selected=''":""; ?>>
 								Mme.

@@ -1,4 +1,8 @@
 <?php
+  session_start();
+  if (isset($_SESSION["mail"])) {
+    header('Location: index.php');
+  }
   include("includes/function.php");
   $error= NULL ;
   $ok= NULL ;
@@ -161,7 +165,7 @@
     <input type="password" name="check_psw" class="form-control" placeholder="Confirmer mot de passe" required=""></br>
     <label style="color : #0beee8;"></label><select type="text" name="civilite" class="form-control" placeholder="civilité" required="">
     <option>
-      mr.
+      Mr.
     </option>
     <option>
       Mme.
