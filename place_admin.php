@@ -1,4 +1,5 @@
 <?php
+$titre = "Places";
 include("includes/pages/header.php");
 if ($user["admin_membre"]!=1) {
 	header('Location: index.php');
