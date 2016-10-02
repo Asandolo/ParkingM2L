@@ -18,14 +18,13 @@ include("includes/pages/header.php");
 //SELECTION DES PLACES RESERVE |
 //-----------------------------	
 
-
 				$CheckPlace = $bdd->prepare("SELECT num_place FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place AND date_fin_periode>= ? AND date_debut_periode <= ?");
 					$CheckPlace->execute(array($aujourdhui, $aujourdhui));
 				$i = 0;
 				while($donnee = $CheckPlace->fetch())
 				{
 					$place[$i]=$donnee['num_place'];
-					// echo $place[$i]."</br>";
+					//echo $place[$i]."</br>";
 					$i++;
 				}
 
@@ -33,6 +32,7 @@ include("includes/pages/header.php");
 //--------------------------------------------
 // SELECTION DE TOUTES LES PALCES DE PARKING |
 //--------------------------------------------
+				
 				$tsajd = strtotime($aujourdhui);
 				
 				$places = $bdd->prepare("SELECT num_place FROM PLACE");
@@ -42,7 +42,7 @@ include("includes/pages/header.php");
 				while ($donneeDispo = $places->fetch()) 
 				{
 					$placeDispo[$j] = $donneeDispo['num_place'];
-					// echo $placeDispo[$j]."</br>";
+					//echo $placeDispo[$j]."</br>";
 					$j++;
 				}
 
@@ -72,10 +72,18 @@ include("includes/pages/header.php");
 
 
 
-				for ($k=0; $k <=count($place) ; $k++) { 
-					for ($l=0; $i <=count($placeDispo) ; $i++) { 
-						if ($place[$l] == $placeDispo[$k]) {
-							echo $place[$l];
+				for ($k=0; $k <=count($place)-1 ; $k++) 
+				{ 
+					for ($l=0; $l <=count($placeDispo)-1 ; $l++) 
+					{ 
+						if ($place[$k] == $placeDispo[$l]) 
+						{
+							$placeDispo[$l]=null;
+							for($increment = $l ; $increment<count($placeDispo)-1 ; $increment++) 
+							{ 
+								$placeDispo[$increment] = $placeDispo[$increment+1];
+							}
+							
 						}
 					}
 				}
