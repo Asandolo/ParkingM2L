@@ -32,8 +32,8 @@ if (isset($_POST["updateprofil"])) {
 				<table class="table table-bordered">
 					<tr>
 						<th>Civilite</th>
-						<td><select name="civilite">
-							<option style="color: black;" <?php echo ($user["civilite_membre"]=="mr." || $user["civilite_membre"]=="Mr.")?"selected=''":""; ?>>
+						<td><select name="civilite" style="color: black;">
+							<option <?php echo ($user["civilite_membre"]=="mr." || $user["civilite_membre"]=="Mr.")?"selected=''":""; ?>>
 								Mr.
 							</option>
 							<option style="color: black;" <?php echo ($user["civilite_membre"]=="Mme.")?"selected=''":""; ?>>
@@ -43,27 +43,27 @@ if (isset($_POST["updateprofil"])) {
 					</tr>
 					<tr>
 						<th>Nom</th>
-						<td><input type="text" name="nom" value="<?php echo $user["nom_membre"]; ?>" required="" ></td>
+						<td><input style="color: black;" type="text" name="nom" value="<?php echo $user["nom_membre"]; ?>" required="" ></td>
 					</tr>					
 					<tr>
 						<th>Prenom</th>
-						<td><input type="text" name="prenom" value="<?php echo $user["prenom_membre"]; ?>" required="" ></td>
+						<td><input style="color: black;" type="text" name="prenom" value="<?php echo $user["prenom_membre"]; ?>" required="" ></td>
 					</tr>
 					<tr>
 						<th>Mail</th>
-						<td><input type="mail" name="mail" value="<?php echo $user["mail_membre"]; ?>" required="" ></td>
+						<td><input style="color: black;" type="mail" name="mail" value="<?php echo $user["mail_membre"]; ?>" required="" ></td>
 					</tr>
 					<tr>
 						<th>Adresse</th>
-						<td><input type="text" name="rue" value="<?php echo $user["adRue_membre"]; ?>" required="" ></td>
+						<td><input style="color: black;" type="text" name="rue" value="<?php echo $user["adRue_membre"]; ?>" required="" ></td>
 					</tr>
 					<tr>
 						<th>Code Postal</th>
-						<td><input type="text" name="cp" value="<?php echo $user["adCP_membre"]; ?>" required="" ></td>
+						<td><input style="color: black;" type="text" name="cp" value="<?php echo $user["adCP_membre"]; ?>" required="" ></td>
 					</tr>
 					<tr>
 						<th>Ville</th>
-						<td><input type="text" name="ville" value="<?php echo $user["adVille_membre"]; ?>" required="" ></td>
+						<td><input style="color: black;" type="text" name="ville" value="<?php echo $user["adVille_membre"]; ?>" required="" ></td>
 					</tr>
 					<?php
 
@@ -72,7 +72,7 @@ if (isset($_POST["updateprofil"])) {
 					 ?>
 					<tr>
 						<th>Date de naissance</th>
-						<td><select name="jour">
+						<td><select style="color: black;" name="jour">
     <?php
       for ($i=1;$i<=31;$i++) {
     ?>
@@ -85,7 +85,7 @@ if (isset($_POST["updateprofil"])) {
       }
     ?>
     </select>
-    <select name="mois">
+    <select style="color: black;" name="mois">
     <?php
       for ($i=1;$i<=31;$i++) {
     ?>
@@ -98,7 +98,7 @@ if (isset($_POST["updateprofil"])) {
       }
     ?>
     </select>
-    <select name="annee">
+    <select style="color: black;" name="annee">
     <?php
       for ($i=Date("Y");$i>=1920;$i--) {
     ?>
