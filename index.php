@@ -42,6 +42,7 @@ if (isset($_POST["reserver"])) {
 	<div class="col-md-12 black">
 	<p>
 	<center>
+		<h2>Historique</h2>
 		<?php
 			$aujourdhui = date("Y-m-d");
 			$tsajd = strtotime($aujourdhui);
