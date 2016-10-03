@@ -3,70 +3,87 @@ $titre = "places disponibles";
 include("includes/pages/header.php");
 					if (isset($_POST['reserver'])) 
 					{
-						$aujourdhui = date("y-m-d");
+            $j_deb = $_POST['jour_deb'];
+            $m_deb = $_POST['mois_deb'];
+            $a_deb = $_POST['annee_deb'];
+            $debut_resa = $a_deb."-".$m_deb."-".$j_deb;
+            $j_fin = $_POST['jour_fin'];
+            $m_fin = $_POST['mois_fin'];
+            $a_fin = $_POST['annee_fin'];
+            $fin_resa = $a_fin."-".$m_fin."-".$j_fin;
+            $aujourdhui = date("y-m-d");
+
+            if ($debut_resa<$fin_resa && $debut_resa>=$aujourdhui) 
+            {
 //-----------------------------
 //SELECTION DES PLACES RESERVE |
 //-----------------------------	
 
-						$CheckPlace = $bdd->prepare("SELECT num_place FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place AND date_fin_periode>= ? AND date_debut_periode <= ?");
-						$CheckPlace->execute(array($aujourdhui, $aujourdhui));
-						$i = 0;
-						while($donnee = $CheckPlace->fetch())
-						{
-							$place[$i]=$donnee['num_place'];
-							$i++;
-						}
+						  $CheckPlace = $bdd->prepare("SELECT num_place FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place AND ((date_debut_periode <= ? AND date_fin_periode>= ?) OR (date_debut_periode <= ? AND date_fin_periode >= ?) OR (date_debut_periode>= ? AND date_fin_periode <= ?))");
+						  $CheckPlace->execute(array($fin_resa,$fin_resa,$debut_resa,$debut_resa,$debut_resa,$fin_resa));
+						  $i = 0;
+						  while($donnee = $CheckPlace->fetch())
+						  {
+						  	$place[$i]=$donnee['num_place'];
+                echo $place[$i]." ";
+						  	$i++;
+						  }
 
 
 //--------------------------------------------
 // SELECTION DE TOUTES LES PALCES DE PARKING |
 //--------------------------------------------
 				
-						$tsajd = strtotime($aujourdhui);
-					
-						$places = $bdd->prepare("SELECT num_place FROM PLACE");
-						$places->execute();
-					
-						$j = 0;
-						while ($donneeDispo = $places->fetch()) 
-						{
-							$placeDispo[$j] = $donneeDispo['num_place'];
-							$j++;
-						}
+						  $tsajd = strtotime($aujourdhui);
+					 
+						  $places = $bdd->prepare("SELECT num_place FROM PLACE");
+						  $places->execute();
+					 
+						  $j = 0;
+						  while ($donneeDispo = $places->fetch()) 
+						  {
+						  	$placeDispo[$j] = $donneeDispo['num_place'];
+						  	$j++;
+						  }
 
 //----------------------------------------------------------------
 //MAGNIPULATION DES TABLEAUX POUR RESORTIR LES PLACES DISPONIBLES |
 //----------------------------------------------------------------
 
-						if(empty($place))
-						{
-						
-						}
-						else
-						{
-							for ($k=0; $k <=count($place)-1 ; $k++) 
-							{ 
-								for ($l=0; $l <=count($placeDispo)-1 ; $l++) 
-								{ 
-									if ($place[$k] == $placeDispo[$l]) 
-									{
-										$placeDispo[$l]=null;
-										for($increment = $l ; $increment<count($placeDispo)-1 ; $increment++) 
-										{ 
-											$placeDispo[$increment] = $placeDispo[$increment+1];
-										}	
-									}
-								}
-							}
-						}
-
-						for($k=0;$k<$j;$k++)
-						{
-							echo $placeDispo[$k]."</br>";
-						}
-					}
-
-?>
+  						if(empty($place))
+  						{
+  						
+  						}
+  						else
+  						{
+  							for ($k=0; $k <=count($place)-1 ; $k++) 
+  							{ 
+  								for ($l=0; $l <=count($placeDispo)-1 ; $l++) 
+  								{ 
+  									if ($place[$k] == $placeDispo[$l]) 
+  									{
+  										$placeDispo[$l]=null;
+  										for($increment = $l ; $increment<count($placeDispo)-1 ; $increment++) 
+  										{ 
+  											$placeDispo[$increment] = $placeDispo[$increment+1];
+  										}	
+  									}
+  								}
+  							}
+  						}
+  
+  						//for($k=0;$k<$j;$k++)
+  						//{
+  							//echo $placeDispo[$k]."</br>";
+  						//}
+  					}
+          }
+          else
+          {
+            echo "Erreur selections des dates, la date de début doits être avant la date de fin et doit se situer après la date d'aujourdhui"; 
+          }
+  
+  ?>
 
 <div class="row">
 	<div class="col-md-12 black">
