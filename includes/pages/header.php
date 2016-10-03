@@ -19,7 +19,7 @@ if ($user["valide_membre"] == 0) {
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Parking M2L -- <?php echo $titre ?></title>
+	<title>Parking M2L -- <?php echo (isset($titre))?$titre:"Parking"; ?></title>
 
 	<link rel="stylesheet" type="text/css" href="includes/css/main.css">
 	<link rel="stylesheet" type="text/css" href="includes/css/bootstrap.css">
@@ -63,7 +63,7 @@ if ($user["valide_membre"] == 0) {
               ?>
             <br />
             <strong><p style="color: #0131B4;">Menu Administrateur</p></strong>
-            <li><a href="user.php">Utilisateurs</a></li>
+            <li><a href="user_admin.php">Utilisateurs</a></li>
             <li><a href="place_admin.php">Places</a></li>
             <li><a href="historique_admin.php">Historique</a></li>
             <li><a href="attente.php">Liste d'attente</a></li>
