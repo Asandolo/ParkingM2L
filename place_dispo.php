@@ -13,22 +13,39 @@ include("includes/pages/header.php");
             $fin_resa = $a_fin."-".$m_fin."-".$j_fin;
             $aujourdhui = date("y-m-d");
 
-            if ($debut_resa<$fin_resa && $debut_resa>=$aujourdhui) 
+            if ($debut_resa<=$fin_resa && $debut_resa>=$aujourdhui) 
             {
 //-----------------------------
 //SELECTION DES PLACES RESERVE |
 //-----------------------------	
 
-						  $CheckPlace = $bdd->prepare("SELECT num_place FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place AND ((date_debut_periode <= ? AND date_fin_periode>= ?) OR (date_debut_periode <= ? AND date_fin_periode >= ?) OR (date_debut_periode>= ? AND date_fin_periode <= ?))");
+						  $CheckPlace = $bdd->prepare("SELECT num_place,date_debut_periode,date_fin_periode FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place");
 						  $CheckPlace->execute(array($fin_resa,$fin_resa,$debut_resa,$debut_resa,$debut_resa,$fin_resa));
 						  $i = 0;
 						  while($donnee = $CheckPlace->fetch())
 						  {
-						  	$place[$i]=$donnee['num_place'];
-                echo $place[$i]." ";
+                $place[$i]=null;
+                if (($donnee['date_debut_periode']<=$fin_resa && $donnee['date_fin_periode']>=$fin_resa)&&($donnee['date_debut_periode']<=$debut_resa && $donnee['date_fin_periode']>=$debut_resa)) 
+                {
+                  $place[$i]=$donnee['num_place'];
+                }
+                elseif ($donnee['date_debut_periode']<=$fin_resa && $donnee['date_fin_periode']>=$fin_resa) 
+                {
+                  $place[$i]=$donnee['num_place'];
+                }
+                elseif ($donnee['date_debut_periode']<=$debut_resa && $donnee['date_fin_periode']>=$debut_resa) 
+                {
+                  $place[$i]=$donnee['num_place'];
+                }
+                elseif ($donnee['date_debut_periode']>=$debut_resa && $donnee['date_fin_periode']<= $fin_resa) 
+                {
+                  $place[$i]=$donnee['num_place'];
+                }
+                else
+                {
+                }
 						  	$i++;
 						  }
-
 
 //--------------------------------------------
 // SELECTION DE TOUTES LES PALCES DE PARKING |
@@ -67,15 +84,16 @@ include("includes/pages/header.php");
   										{ 
   											$placeDispo[$increment] = $placeDispo[$increment+1];
   										}	
+                      array_pop($placeDispo);
   									}
   								}
   							}
   						}
   
-  						//for($k=0;$k<$j;$k++)
-  						//{
-  							//echo $placeDispo[$k]."</br>";
-  						//}
+  						for($k=0;$k<count($placeDispo);$k++)
+  						{
+  							echo $placeDispo[$k]."</br>";
+  						}
   					}
           }
           else
