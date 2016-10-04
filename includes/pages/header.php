@@ -22,7 +22,8 @@ if ($user["valide_membre"] == 0) {
 	<title>Parking M2L -- <?php echo (isset($titre))?$titre:"Parking"; ?></title>
 
 	<link rel="stylesheet" type="text/css" href="includes/css/main.css">
-	<link rel="stylesheet" type="text/css" href="includes/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="includes/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="includes/css/font-awesome.css">
 
 	<script type="text/javascript" src="includes/js/jq.js"></script>
   <script type="text/javascript" src="includes/js/bootstrap.js"></script>
@@ -53,22 +54,30 @@ if ($user["valide_membre"] == 0) {
         <div class="navbar-collapse collapse sidebar-navbar-collapse">
           <ul class="nav navbar-nav">
             <strong><p style="color: #0131B4;">Menu Utilisateur</p></strong>
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="profil.php">Profil</a></li>
-            <li><a href="historique.php">Historique de places</a></li>
-            <li><a href="doc.php">Documentation</a></li>
+            <li><a href="index.php"><i class="fa fa-home" aria-hidden="true"></i>
+Accueil</a></li>
+            <li><a href="profil.php"><i class="fa fa-user" aria-hidden="true"></i>
+Profil</a></li>
+            <li><a href="historique.php"><i class="fa fa-history" aria-hidden="true"></i>
+Historique de places</a></li>
+            <li><a href="doc.php"><i class="fa fa-file-text-o" aria-hidden="true"></i>
+Documentation</a></li>
             <?php 
 
             if ($user["admin_membre"] == 1) {
               ?>
             <br />
             <strong><p style="color: #0131B4;">Menu Administrateur</p></strong>
-            <li><a href="user_admin.php">Utilisateurs</a></li>
-            <li><a href="place_admin.php">Places</a></li>
-            <li><a href="historique_admin.php">Historique</a></li>
-            <li><a href="attente.php">Liste d'attente</a></li>
+            <li><a href="user_admin.php"><i class="fa fa-users" aria-hidden="true"></i>
+Utilisateurs</a></li>
+            <li><a href="place_admin.php"><i class="fa fa-car" aria-hidden="true"></i>
+Places</a></li>
+            <li><a href="historique_admin.php"><i class="fa fa-history" aria-hidden="true"></i>
+Historique</a></li>
+            <li><a href="attente.php"><i class="fa fa-pause" aria-hidden="true"></i>
+Liste d'attente</a></li>
               <?php } ?>
-            <li><a style="color:red;" href="logout.php">Déconnexion</a></li>
+            <li><a style="color:red;" href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>Déconnexion</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
