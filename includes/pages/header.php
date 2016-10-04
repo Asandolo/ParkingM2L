@@ -72,8 +72,6 @@ Documentation</a></li>
 Utilisateurs</a></li>
             <li><a href="place_admin.php"><i class="fa fa-car" aria-hidden="true"></i>
 Places</a></li>
-            <li><a href="historique_admin.php"><i class="fa fa-history" aria-hidden="true"></i>
-Historique</a></li>
             <li><a href="attente.php"><i class="fa fa-pause" aria-hidden="true"></i>
 Liste d'attente</a></li>
               <?php } ?>
