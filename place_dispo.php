@@ -69,7 +69,7 @@ include("includes/pages/header.php");
 
   						if(empty($place))
   						{
-  						
+  						  
   						}
   						else
   						{
@@ -95,12 +95,53 @@ include("includes/pages/header.php");
   							echo $placeDispo[$k]."</br>";
   						}
   					}
+//-----------------------------------------------------------
+// SI IL N'Y A PAS DE PLACE DISPONNIBLE ON MET DANS LE RANG  |
+//-----------------------------------------------------------
+
+            if (empty($placeDispo)) 
+            {
+              $countRang = $bdd->prepare("SELECT rang FROM MEMBRE ORDER BY rang");
+              $countRang->execute();
+              $attribution=0;
+              while ($donneeCRang = $countRang->fetch()) 
+              {
+                  $attribution = $donneeCRang['rang']+1;
+              }
+              echo $attribution;
+
+              $attribRang = $bdd->prepare("UPDATE MEMBRE SET rang = ? WHERE id_membre= ?");
+              $attribRang -> execute(array($attribution,$user['id_membre']));
+            }
+
+//--------------------------
+// 
+//--------------------------
+
+            else
+            {
+              $checkPeriode = $bdd->prepare("SELECT* FROM PERIODE");
+              $checkPeriode ->execute();
+              $isPeriode= 0;
+              while ($donneeCheckPer = $checkPeriode->fetch()) 
+              {
+                if($donneeCheckPer['date_debut_periode'] == $debut_resa)
+                {
+                  $isPeriode=1;
+                }
+              }
+              if($isPeriode=1)
+              {
+                $insertPer = $bdd->prepare("INSERT INTO PERIODE VALUES (?)");
+                $insertPer->execute(array($debut_resa));
+              }
+
+            }
           }
           else
           {
             echo "Erreur selections des dates, la date de début doits être avant la date de fin et doit se situer après la date d'aujourdhui"; 
           }
-  
   ?>
 
 <div class="row">
