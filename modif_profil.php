@@ -24,98 +24,98 @@ if (isset($_POST["updateprofil"])) {
 }
 
 ?>
-		<div class="row">
-			<div class="col-md-12 black">
-				<h2>Votre profil</h2>
+<div class="row">
+	<div class="col-md-12 black">
+		<h2>Votre profil</h2>
 
-				<form method="POST">
-				<table class="table table-bordered">
-					<tr>
-						<th>Civilite</th>
-						<td><select name="civilite" style="color: black;">
-							<option <?php echo ($user["civilite_membre"]=="mr." || $user["civilite_membre"]=="Mr.")?"selected=''":""; ?>>
-								Mr.
+		<form method="POST">
+			<table class="table table-bordered">
+				<tr>
+					<th>Civilite</th>
+					<td><select name="civilite" style="color: black;">
+						<option <?php echo ($user["civilite_membre"]=="mr." || $user["civilite_membre"]=="Mr.")?"selected=''":""; ?>>
+							Mr.
+						</option>
+						<option style="color: black;" <?php echo ($user["civilite_membre"]=="Mme.")?"selected=''":""; ?>>
+							Mme.
+						</option>
+					</select></td>
+				</tr>
+				<tr>
+					<th>Nom</th>
+					<td><input style="color: black;" type="text" name="nom" value="<?php echo $user["nom_membre"]; ?>" required="" ></td>
+				</tr>					
+				<tr>
+					<th>Prenom</th>
+					<td><input style="color: black;" type="text" name="prenom" value="<?php echo $user["prenom_membre"]; ?>" required="" ></td>
+				</tr>
+				<tr>
+					<th>Mail</th>
+					<td><input style="color: black;" type="mail" name="mail" value="<?php echo $user["mail_membre"]; ?>" required="" ></td>
+				</tr>
+				<tr>
+					<th>Adresse</th>
+					<td><input style="color: black;" type="text" name="rue" value="<?php echo $user["adRue_membre"]; ?>" required="" ></td>
+				</tr>
+				<tr>
+					<th>Code Postal</th>
+					<td><input style="color: black;" type="text" name="cp" value="<?php echo $user["adCP_membre"]; ?>" required="" ></td>
+				</tr>
+				<tr>
+					<th>Ville</th>
+					<td><input style="color: black;" type="text" name="ville" value="<?php echo $user["adVille_membre"]; ?>" required="" ></td>
+				</tr>
+				<?php
+
+				$datenaiss = explode("-", $user["date_naiss_membre"]);
+
+				?>
+				<tr>
+					<th>Date de naissance</th>
+					<td><select style="color: black;" name="jour">
+						<?php
+						for ($i=1;$i<=31;$i++) {
+							?>
+							<option <?php echo ($datenaiss[2]==$i)?"selected=''":""; ?>>
+								<?php
+								echo $i;
+								?>    
 							</option>
-							<option style="color: black;" <?php echo ($user["civilite_membre"]=="Mme.")?"selected=''":""; ?>>
-								Mme.
+							<?php
+						}
+						?>
+					</select>
+					<select style="color: black;" name="mois">
+						<?php
+						for ($i=1;$i<=31;$i++) {
+							?>
+							<option <?php echo ($datenaiss[1]==$i)?"selected=''":""; ?>>
+								<?php
+								echo $i;
+								?>    
 							</option>
-						</select></td>
-					</tr>
-					<tr>
-						<th>Nom</th>
-						<td><input style="color: black;" type="text" name="nom" value="<?php echo $user["nom_membre"]; ?>" required="" ></td>
-					</tr>					
-					<tr>
-						<th>Prenom</th>
-						<td><input style="color: black;" type="text" name="prenom" value="<?php echo $user["prenom_membre"]; ?>" required="" ></td>
-					</tr>
-					<tr>
-						<th>Mail</th>
-						<td><input style="color: black;" type="mail" name="mail" value="<?php echo $user["mail_membre"]; ?>" required="" ></td>
-					</tr>
-					<tr>
-						<th>Adresse</th>
-						<td><input style="color: black;" type="text" name="rue" value="<?php echo $user["adRue_membre"]; ?>" required="" ></td>
-					</tr>
-					<tr>
-						<th>Code Postal</th>
-						<td><input style="color: black;" type="text" name="cp" value="<?php echo $user["adCP_membre"]; ?>" required="" ></td>
-					</tr>
-					<tr>
-						<th>Ville</th>
-						<td><input style="color: black;" type="text" name="ville" value="<?php echo $user["adVille_membre"]; ?>" required="" ></td>
-					</tr>
-					<?php
-
-					$datenaiss = explode("-", $user["date_naiss_membre"]);
-
-					 ?>
-					<tr>
-						<th>Date de naissance</th>
-						<td><select style="color: black;" name="jour">
-    <?php
-      for ($i=1;$i<=31;$i++) {
-    ?>
-    <option <?php echo ($datenaiss[2]==$i)?"selected=''":""; ?>>
-        <?php
-          echo $i;
-        ?>    
-    </option>
-    <?php
-      }
-    ?>
-    </select>
-    <select style="color: black;" name="mois">
-    <?php
-      for ($i=1;$i<=31;$i++) {
-    ?>
-    <option <?php echo ($datenaiss[1]==$i)?"selected=''":""; ?>>
-        <?php
-          echo $i;
-        ?>    
-    </option>
-    <?php
-      }
-    ?>
-    </select>
-    <select style="color: black;" name="annee">
-    <?php
-      for ($i=Date("Y");$i>=1920;$i--) {
-    ?>
-    <option <?php echo ($datenaiss[0]==$i)?"selected=''":""; ?>>
-        <?php
-          echo $i;
-        ?>    
-    </option>
-    <?php
-      }
-    ?>
-    </select></td>
-					</tr>
-				</table>
-				<input type="submit" name="updateprofil" class="btn btn-success">
-				</form>
-			</div>
-		</div>
+							<?php
+						}
+						?>
+					</select>
+					<select style="color: black;" name="annee">
+						<?php
+						for ($i=Date("Y");$i>=1920;$i--) {
+							?>
+							<option <?php echo ($datenaiss[0]==$i)?"selected=''":""; ?>>
+								<?php
+								echo $i;
+								?>    
+							</option>
+							<?php
+						}
+						?>
+					</select></td>
+				</tr>
+			</table>
+			<input type="submit" name="updateprofil" class="btn btn-success">
+		</form>
+	</div>
+</div>
 
 <?php include("includes/pages/footer.php"); ?>

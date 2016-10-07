@@ -1,36 +1,36 @@
 <?php
-  session_start();
-  if (isset($_SESSION["mail"])) {
-    header('Location: index.php');
-  }
-  include("includes/function.php");
-  $error= NULL ;
-  if(isset($_POST["conect"]))
-  {
-    $mail= $_POST["mail"];
-    $psw= hashMdp($_POST["psw"]);
+session_start();
+if (isset($_SESSION["mail"])) {
+  header('Location: index.php');
+}
+include("includes/function.php");
+$error= NULL ;
+if(isset($_POST["conect"]))
+{
+  $mail= $_POST["mail"];
+  $psw= hashMdp($_POST["psw"]);
 
-    $request = $bdd->prepare("SELECT mail_membre,psw_membre,valide_membre FROM MEMBRE WHERE mail_membre=?");
-    $request->execute(array($mail));
-    $data = $request->fetch();
+  $request = $bdd->prepare("SELECT mail_membre,psw_membre,valide_membre FROM MEMBRE WHERE mail_membre=?");
+  $request->execute(array($mail));
+  $data = $request->fetch();
 
-    if ($data["valide_membre"] == 1) {
+  if ($data["valide_membre"] == 1) {
       # code...
-      if($psw==$data["psw_membre"])
-      {
-          $_SESSION["mail"] = $data["mail_membre"];
-          header('Location: index.php');
-      }
-      else
-      {
-        $error = "Le mail ou le mot de passe est éroné";
-      }
-
-    }else{
-      $error = "Votre compte n'est pas activé";
+    if($psw==$data["psw_membre"])
+    {
+      $_SESSION["mail"] = $data["mail_membre"];
+      header('Location: index.php');
+    }
+    else
+    {
+      $error = "Le mail ou le mot de passe est éroné";
     }
 
-  }  
+  }else{
+    $error = "Votre compte n'est pas activé";
+  }
+
+}  
 ?>
 
 
@@ -42,29 +42,29 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="includes/css/bootstrap.css">
   <style type="text/css">
-      body {
-    padding-top: 120px;
-    padding-bottom: 40px;
-    background-color: #eee;
-  
-  }
-  .btn 
-  {
-   outline:0;
-   border:none;
-   border-top:none;
-   border-bottom:none;
-   border-left:none;
-   border-right:none;
-   box-shadow:inset 2px -3px rgba(0,0,0,0.15);
-  }
-  .btn:focus
-  {
-   outline:0;
-   -webkit-outline:0;
-   -moz-outline:0;
-  }
-  .fullscreen_bg {
+    body {
+      padding-top: 120px;
+      padding-bottom: 40px;
+      background-color: #eee;
+      
+    }
+    .btn 
+    {
+     outline:0;
+     border:none;
+     border-top:none;
+     border-bottom:none;
+     border-left:none;
+     border-right:none;
+     box-shadow:inset 2px -3px rgba(0,0,0,0.15);
+   }
+   .btn:focus
+   {
+     outline:0;
+     -webkit-outline:0;
+     -moz-outline:0;
+   }
+   .fullscreen_bg {
     position: fixed;
     top: 0;
     right: 0;
@@ -79,7 +79,7 @@
     max-width: 280px;
     padding: 15px;
     margin: 0 auto;
-      margin-top:50px;
+    margin-top:50px;
   }
   .form-signin .form-signin-heading, .form-signin {
     margin-bottom: 10px;
@@ -122,30 +122,30 @@
     text-align: center;
     text-shadow: 0 2px 2px rgba(0,0,0,0.5);
   }
-  </style>
-  <script type="text/javascript" src="includes/js/jq.js"></script>
-  <script type="text/javascript" src="includes/js/bootstrap.js"></script>
+</style>
+<script type="text/javascript" src="includes/js/jq.js"></script>
+<script type="text/javascript" src="includes/js/bootstrap.js"></script>
 </head>
 <body>
   <div id="fullscreen_bg" class="fullscreen_bg"/>
 
   <div class="container">
-  <center>
-    <span style="color : red;">
-      <?php
+    <center>
+      <span style="color : red;">
+        <?php
         echo $error;
-      ?>
-    </span>
-  </center>
-  <form class="form-signin" method="POST">
-    <h1 class="form-signin-heading text-muted">Connection</h1>
-    <input type="text" name="mail" class="form-control" placeholder="Adresse e-mail" required="" autofocus="">
-    <input type="password" name="psw" class="form-control" placeholder="Mot de Passe" required="">
-    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Se connecter" name="conect">
-  </form>
-  <p align="center" >
-  <a href="register.php" style="color : #0beee8;">S'enregistrer</a>
-  </p>    
-</div>
+        ?>
+      </span>
+    </center>
+    <form class="form-signin" method="POST">
+      <h1 class="form-signin-heading text-muted">Connection</h1>
+      <input type="text" name="mail" class="form-control" placeholder="Adresse e-mail" required="" autofocus="">
+      <input type="password" name="psw" class="form-control" placeholder="Mot de Passe" required="">
+      <input class="btn btn-lg btn-primary btn-block" type="submit" value="Se connecter" name="conect">
+    </form>
+    <p align="center" >
+      <a href="register.php" style="color : #0beee8;">S'enregistrer</a>
+    </p>    
+  </div>
 </body>
 </html>
