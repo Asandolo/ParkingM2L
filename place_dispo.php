@@ -135,7 +135,8 @@ include("includes/pages/header.php");
                 $insertPer = $bdd->prepare("INSERT INTO PERIODE VALUES (?)");
                 $insertPer->execute(array($debut_resa));
               }
-
+              $insertResa = $bdd->prepare("INSERT INTO RESERVER VALUES (?,?,?,?)");
+              $insertResa->execute(array($fin_resa,$user['id_membre'],$placeDispo[0],$debut_resa));
             }
           }
           else
