@@ -1,4 +1,4 @@
-<?php include('includes/pages/header.php'); ?>
+<?php  $titre = "Documentation"; include('includes/pages/header.php'); ?>
 <div class="row">
 	<div class="col col-md-12 black">
 		<h2>Documentation</h2>

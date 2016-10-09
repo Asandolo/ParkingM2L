@@ -11,9 +11,6 @@ if (isset($_POST["reserver"])) {
 
 <div class="row">
 	<div class="col-md-12 black">
-		<p>ici presentation</p>
-	</div>
-	<div class="col-md-12 black">
 		<center>
 			<?php
 			$ajd = date("Y-m-d"); 
