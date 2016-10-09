@@ -41,7 +41,7 @@ if($countHavePlace>0)
 }
 
 
-elseif ($rangUser>0) 
+if ($rangUser>0) 
 {
   ?>
   <div class="row">
@@ -53,7 +53,7 @@ elseif ($rangUser>0)
 }
 
 
-elseif ($havePlace == 0 && $rangUser == 0) 
+if ($havePlace == 0 && $rangUser == 0) 
 {
   if (isset($_POST['reserver'])) 
   {
