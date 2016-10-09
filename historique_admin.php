@@ -51,11 +51,13 @@ if ($user["admin_membre"]!=1) {
 				?>
 			</table>
 			<?php
+			//$histusers->closeCursor();
 		}elseif(isset($_GET["place"]) || !empty($_GET["place"])){
 			$histplaces = $bdd->prepare("SELECT * FROM `RESERVER` AS `r`, `MEMBRE` as `m`, `PLACE` As `p` WHERE `r`.`id_membre` = `m`.`id_membre` AND `p`.`id_place` = `r`.`id_place` AND `r`.`id_place` = ?;");
 			$histplaces->execute(array($_GET["place"]));
 			$histpl=$histplaces->fetch();
 			$hpcount=$histplaces->rowCount();
+			//$histpl->closeCursor();
 			?>
 			<h3>Histrique de la place <?php  echo $histpl["num_place"]; ?></h3>
 
