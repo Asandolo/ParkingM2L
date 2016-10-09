@@ -15,10 +15,10 @@ if ($user["admin_membre"]!=1) {
 			
 			$histusers = $bdd->prepare("SELECT * FROM `RESERVER` AS `r`, `MEMBRE` as `m`, `PLACE` As `p` WHERE `r`.`id_membre` = `m`.`id_membre` AND `p`.`id_place` = `r`.`id_place` AND `r`.`id_membre` = ? AND `r`.`date_debut_periode` <= ? ORDER BY `r`.`date_fin_periode` DESC;");
 			$histusers->execute(array($_GET["user"],$aujourdhui));
-			$histus=$histusers->fetch();
 			$hucount=$histusers->rowCount();
 			?>	
-			<h3>Places de <?php echo strtoupper($histus["nom_membre"])." ".$histus["prenom_membre"]; ?></h3>
+			<h3 id="thistuser"></h3>
+
 			<table class="table table-bordered">
 				<tr>
 					<th>NUMERO DE PLACE</th>
@@ -35,8 +35,10 @@ if ($user["admin_membre"]!=1) {
 					</tr>
 					<?php
 				}
-
-				while ($histuser=$histusers->fetch()) {
+				$username = "";
+				while ($histuser=$histusers->fetch()) 
+				{
+					$username = strtoupper($histuser["nom_membre"])." ".$histuser["prenom_membre"];
 					$debut = strtotime($histuser['date_debut_periode']);
 					$fin = strtotime($histuser['date_fin_periode']);
 					?>
@@ -50,16 +52,18 @@ if ($user["admin_membre"]!=1) {
 				}
 				?>
 			</table>
+			<script type="text/javascript">
+				$("#thistuser").text("Place de <?php echo $username; ?>");
+			</script>
 			<?php
 			//$histusers->closeCursor();
 		}elseif(isset($_GET["place"]) || !empty($_GET["place"])){
 			$histplaces = $bdd->prepare("SELECT * FROM `RESERVER` AS `r`, `MEMBRE` as `m`, `PLACE` As `p` WHERE `r`.`id_membre` = `m`.`id_membre` AND `p`.`id_place` = `r`.`id_place` AND `r`.`id_place` = ?;");
 			$histplaces->execute(array($_GET["place"]));
-			$histpl=$histplaces->fetch();
 			$hpcount=$histplaces->rowCount();
 			//$histpl->closeCursor();
 			?>
-			<h3>Histrique de la place <?php  echo $histpl["num_place"]; ?></h3>
+			<h3 id="thistplace"></h3>
 
 			<table class="table table-bordered">
 				<tr>
@@ -70,11 +74,9 @@ if ($user["admin_membre"]!=1) {
 					<th>Etat Actuel</th>
 				</tr>
 				<?php 
+				$place = "";
 				while ($histplace=$histplaces->fetch()) {
-
-					echo("<pre>");
-					print_r($histplace);
-					echo "</pre>";
+					$place = $histplace["num_place"];
 					$debut = strtotime($histplace['date_debut_periode']);
 					$fin = strtotime($histplace['date_fin_periode']);
 					?>
@@ -91,6 +93,9 @@ if ($user["admin_membre"]!=1) {
 
 				?>
 			</table>
+			<script type="text/javascript">
+				$("#thistplace").text("Historique de la place : <?php echo $place; ?>");
+			</script>
 			<?php
 		}else{
 			header('Locoation: index.php');

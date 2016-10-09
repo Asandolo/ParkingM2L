@@ -3,13 +3,11 @@ $titre = "Acceuil";
 include("includes/pages/header.php");
 
 
-if (isset($_POST["reserver"])) {
-	# code de reservation de place
-}
 
 ?>
 
 <div class="row">
+
 	<div class="col-md-12 black">
 		<center>
 			<?php

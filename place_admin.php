@@ -58,7 +58,7 @@ if (isset($_POST["ac"])) {
 				<?php
 				while ($place=$splace->fetch()) {
 
-					$histcount = $bdd->prepare("SELECT cOUNT(`id_place`) As `hcount` FROM `reserver` WHERE `place` = ?");
+					$histcount = $bdd->prepare("SELECT cOUNT(`id_place`) As `hcount` FROM `reserver` WHERE `id_place` = ?");
 					$histcount->execute(array($place["id_place"]));
 					$hc=$histcount->fetch();
 					?>
