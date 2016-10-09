@@ -297,5 +297,4 @@ for ($i=Date("Y");$i<=Date("Y")+3;$i++)
 </div>
 <?php  
 }
-?>
-<?php include("includes/pages/footer.php"); ?>
+include("includes/pages/footer.php"); ?>
