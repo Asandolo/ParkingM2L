@@ -9,6 +9,17 @@ function hashMdp($psw) {
 }
 
 
+//Chaine alléatoire
+function stringRand($car) {
+$string = "";
+$chaine = "abcdefghijklmnpqrstuvwxy1234567890";
+srand((double)microtime()*1000000);
+for($i=0; $i<$car; $i++) {
+$string .= $chaine[rand()%strlen($chaine)];
+}
+return $string;
+}
+
 //BDD MySql
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
  $srv = 'A REMPIRE'; //adresse du serveur (localhost si inconu)

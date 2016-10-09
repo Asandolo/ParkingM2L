@@ -4,33 +4,35 @@ if (isset($_SESSION["mail"])) {
   header('Location: index.php');
 }
 include("includes/function.php");
-$error= NULL ;
-if(isset($_POST["conect"]))
-{
-  $mail= $_POST["mail"];
-  $psw= hashMdp($_POST["psw"]);
+$o = 0;
+$error = NULL;
+if (isset($_POST["mdp"])) {
+  
+  $mail = htmlspecialchars($_POST["mail"]);
 
-  $request = $bdd->prepare("SELECT mail_membre,psw_membre,valide_membre FROM MEMBRE WHERE mail_membre=?");
-  $request->execute(array($mail));
-  $data = $request->fetch();
+$s = $bdd->prepare("SELECT * FROM `membre` WHERE `mail_membre` = ?");
+$s->execute(array($mail));
+$c = $s->rowCount();
 
-  if ($data["valide_membre"] == 1) {
-      # code...
-    if($psw==$data["psw_membre"])
-    {
-      $_SESSION["mail"] = $data["mail_membre"];
-      header('Location: index.php');
-    }
-    else
-    {
-      $error = "Le mail ou le mot de passe est éroné";
-    }
+if ($c>0) {
+  
+  $newpass = stringRand(10);
+  $hnewwpass = hashMdp($newpass);
 
-  }else{
-    $error = "Votre compte n'est pas activé";
-  }
+  $u=$bdd->prepare("UPDATE `membre` SET `psw_membre` = ? WHERE `mail_membre` = ?");
+  $u->execute(array($hnewwpass,$mail));
 
-}  
+  $o = 1;
+
+
+}else{
+  $error = "Le compte n'existe pas";
+}
+
+
+}
+
+
 ?>
 
 
@@ -131,6 +133,25 @@ if(isset($_POST["conect"]))
 
   <div class="container">
     <center>
+      <?php
+      if ($o==1) {
+        ?>
+<div class="row">
+  <div class="col-md-12 black">
+    <p>On supose l'envois du mail suivant à l'utilisateur :</p>
+    <br />
+    <br />
+    <p>suite a votre demande votre mot de passe a été regénéré<br />
+      votre noiuveau mot de passe est : <?php echo $newpass ?> <br />
+      Merci de le changer au plus vite</p>
+      <br />
+      <a href="index.php">retour</a>
+    </div>
+  </div>
+        <?php
+      }
+
+      ?>
       <span style="color : red;">
         <?php
         echo $error;
@@ -138,14 +159,12 @@ if(isset($_POST["conect"]))
       </span>
     </center>
     <form class="form-signin" method="POST">
-      <h1 class="form-signin-heading text-muted">Connection</h1>
-      <input type="text" name="mail" class="form-control" placeholder="Adresse e-mail" required="" autofocus="">
-      <input type="password" name="psw" class="form-control" placeholder="Mot de Passe" required="">
-      <input class="btn btn-lg btn-primary btn-block" type="submit" value="Se connecter" name="conect">
+      <h1 class="form-signin-heading text-muted">Mot de passe oublié</h1>
+      <input type="mail" name="mail" class="form-control" placeholder="Adresse e-mail" required="" autofocus="">
+      <input type="submit"  class="btn btn-success" name="mdp" value="Renvoyez moi mon mot de passe">
     </form>
     <p align="center" >
-      <a href="register.php" style="color : #0beee8;">S'enregistrer</a>
-      <a href="mdpoublie.php" style="color : #0beee8;">Mot de passe oublié</a>
+      <a href="login.php" style="color : #0beee8;">Connexion</a>
     </p>    
   </div>
 </body>
