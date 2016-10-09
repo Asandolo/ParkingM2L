@@ -11,7 +11,7 @@
 						Pour réservé une place
 						<ul> 
 							<li> il ne faut pas avoir de place en cours d'utilisation</li>
-							<li> il ne faut pas avoir de rang</li>
+							<li> il ne faut pas avoir de rang dans la fils d'atente</li>
 						</ul>
 					</p>
 					<p>Si il y a des places de libres la première vous est atribué</p>
@@ -24,7 +24,7 @@
 					Vous pouvez
 					<ul>
 						<li>Changer vos informations</li>
-						<li>Changer votre mot de passe/li>
+						<li>Changer votre mot de passe></i>
 					</ul>
 				</div>
 			</div>
