@@ -7,8 +7,8 @@ $aujourdhui = date("Y-m-d");
 // VERIFIER QUE L'UTILISATEUR N'A PAS DE PLACE OU DE RANG |
 //--------------------------------------------------------
 
-$checkHavePlace = $bdd->prepare("SELECT* FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place AND id_membre= ?");
-$checkHavePlace->execute(array($user['id_membre']));
+$checkHavePlace = $bdd->prepare("SELECT* FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place AND id_membre= ? AND date_fin_periode>?");
+$checkHavePlace->execute(array($user['id_membre'],$aujourdhui));
 $countHavePlace = $checkHavePlace->rowcount();
 
 $checkHaveRang = $bdd->prepare("SELECT rang FROM MEMBRE WHERE id_membre= ?");
@@ -24,10 +24,10 @@ if($countHavePlace>0)
 {
   while ($donneCheckHavePlace = $checkHavePlace->fetch()) 
   {
+  	$havePlace=1;
+  	$placeUser = $donneCheckHavePlace['num_place'];
     if(($donneCheckHavePlace['date_debut_periode']<=$aujourdhui) && ($donneCheckHavePlace['date_fin_periode']>=$aujourdhui))
-    {
-      $placeUser = $donneCheckHavePlace['num_place'];    
-      $havePlace = 1;
+    {   
       ?>
         <div class="row">
           <div class="col-md-12 black">
@@ -36,6 +36,17 @@ if($countHavePlace>0)
         </div> 
       <?php
     }
+    elseif($aujourdhui<=$donneCheckHavePlace['date_fin_periode'])
+   	{
+   		$dateDebutResa=date("d/m/Y", strtotime($donneCheckHavePlace['date_debut_periode']));
+      	?>
+        <div class="row">
+          <div class="col-md-12 black">
+            <p><center><h2><?php echo "Vous avez la place numéro ".$placeUser." à partir du ".$dateDebutResa; ?></h2></center></p>
+          </div>
+        </div> 
+      	<?php
+   	}
   }  
 }
 
