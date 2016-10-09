@@ -28,7 +28,7 @@ if (isset($_POST["reserver"])) {
 
 			if ($count<=0 && $user["rang"]<=0) {
 				echo "<p style='font-size:20px'>Vous n'avez aucune place et n'etes pas dans la file d'atente</p>";
-				echo "<form><input class='btn btn-danger' value='Reserver une place' name='reserver' /></form>";
+				echo "<form><a class='btn btn-danger' value='Reserver une place' href='place_dispo.php' />Reserver une place</a></form>";
 			}elseif($user["rang"]<=0){
 				echo "<p style='font-size:20px'>Vous avez la place : <br /><strong>".$place["num_place"]."</strong></p>";
 			}else{
