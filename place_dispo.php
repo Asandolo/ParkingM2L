@@ -11,14 +11,6 @@ $checkHavePlace = $bdd->prepare("SELECT* FROM PLACE,RESERVER WHERE PLACE.id_plac
 $checkHavePlace->execute(array($user['id_membre'],$aujourdhui));
 $countHavePlace = $checkHavePlace->rowcount();
 
-$checkHaveRang = $bdd->prepare("SELECT rang FROM MEMBRE WHERE id_membre= ?");
-$checkHaveRang->execute(array($user['id_membre']));
-while ($donneCheckHaveRang = $checkHaveRang->fetch()) 
-{
-  $rangUser = $donneCheckHaveRang['rang'];
-}
-
-
 $havePlace=0;
 if($countHavePlace>0)
 {
@@ -50,12 +42,12 @@ if($countHavePlace>0)
   }  
 }
 
-if ($rangUser>0) 
+if ($user['rang']>0) 
 {
   ?>
   <div class="row">
     <div class="col-md-12 black">
-    <p><center><h2><?php echo "Vous avez le rang numéro ".$rangUser; ?></h2></center></p>
+    <p><center><h2><?php echo "Vous avez le rang numéro ".$user['rang']; ?></h2></center></p>
     </div>
   </div> 
   <?php
