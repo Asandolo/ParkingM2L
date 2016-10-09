@@ -14,8 +14,8 @@ include("includes/pages/header.php");
 			$ajd = date("Y-m-d"); 
 			$tsajd = strtotime($ajd);
 
-			$places = $bdd->prepare("SELECT * FROM `reserver`, `place` WHERE `id_membre` = ? AND date_debut_periode <= ? AND date_fin_periode >= ? AND `reserver`.`id_place` = `place`.`id_place`");
-			$places->execute(array($user["id_membre"],$ajd,$ajd));
+			$places = $bdd->prepare("SELECT* FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place AND id_membre= ? AND date_fin_periode>?");
+			$places->execute(array($user["id_membre"],$ajd));
 			$place = $places->fetch();
 
 
