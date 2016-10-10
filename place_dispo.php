@@ -76,7 +76,6 @@ if ($havePlace == 0)
 //SELECTION DES PLACES DEJA RESERVE |
 //----------------------------------	
 
-      		echo"yolo"; 
       		$CheckPlace = $bdd->prepare("SELECT num_place,date_debut_periode,date_fin_periode FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place");
       		$CheckPlace->execute(array($fin_resa,$fin_resa,$debut_resa,$debut_resa,$debut_resa,$fin_resa));
       		$i = 0;
