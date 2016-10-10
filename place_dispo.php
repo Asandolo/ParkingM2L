@@ -106,7 +106,7 @@ if ($havePlace == 0)
       		
       		$tsajd = strtotime($aujourdhui);
 		
-      		$places = $bdd->prepare("SELECT num_place FROM PLACE");
+      		$places = $bdd->prepare("SELECT num_place FROM PLACE WHERE place_active = 1");
       		$places->execute();
       		$j=0;
       		while ($donneePlaceDisp = $places->fetch()) 
