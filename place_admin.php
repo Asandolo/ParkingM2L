@@ -17,12 +17,33 @@ if (isset($_POST["ac"])) {
 	$ac->execute(array($_POST["id"]));
 }
 
+if (isset($_POST["add"])) {
 
+	$s = $bdd->query("SELECT * FROM `place` ORDER BY `id_place` DESC LIMIT 1;");
+	$d=$s->fetch();
+	
+	$der = $d["num_place"];
+
+	for ($i=$der+1; $i <=$der+$_POST["num"] ; $i++) {
+	echo $i; 
+		$add = $bdd->prepare("INSERT INTO `place` (`num_place`,`active_place`) VALUES(?,1)");
+		$add->execute(array($i));
+	}
+
+}
 
 
 ?>
 <div class="row">
 	<div class="col-md-12 black">
+
+		<h3>Ajout d'une place</h3>
+
+		<form method="POST">
+				<input type="number" name="num" placeholder="Nombre de place a ajouter">
+				<input type="submit" name="add" class="btn btn-success">
+		</form>
+
 		<?php
 
 		$nbplaceparpage = 10;
