@@ -11,8 +11,9 @@ include("includes/pages/header.php");
 	<div class="col-md-12 black">
 		<center>
 			<?php
-			$ajd = date("Y-m-d"); 
-			$tsajd = strtotime($ajd);
+			$ajd = date("Y-m-d");
+			$tsajd = strtotime($ajd);   
+
 
 			$places = $bdd->prepare("SELECT* FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place AND id_membre= ? AND date_fin_periode>?");
 			$places->execute(array($user["id_membre"],$ajd));
@@ -25,7 +26,16 @@ include("includes/pages/header.php");
 				echo "<p style='font-size:20px'>Vous n'avez aucune place et n'etes pas dans la file d'atente</p>";
 				echo "<form><a class='btn btn-danger' value='Reserver une place' href='place_dispo.php' />Reserver une place</a></form>";
 			}elseif($user["rang"]<=0){
-				echo "<p style='font-size:20px'>Vous avez la place : <br /><strong>".$place["num_place"]."</strong></p>";
+				if(($place['date_debut_periode']<=$ajd) && ($place['date_fin_periode']>=$ajd))
+				{
+					echo "<p style='font-size:20px'>Vous avez la place : <br /><strong>".$place["num_place"]."</strong></p>";
+				}
+				elseif($ajd<=$place['date_fin_periode']) 
+				{
+					$deb_resa_fr=date("d/m/Y", strtotime($place['date_debut_periode'])) ;
+					$fin_resa_fr=date("d/m/Y", strtotime($place['date_fin_periode'])) ;
+					echo "<h2>Vous avez la place : "."<br />".$place["num_place"]."</br> du ".$deb_resa_fr." au ".$fin_resa_fr."</h2>" ;
+				}
 			}else{
 				echo "<p style='font-size:20px'>Vous avez le rang : <br /><strong>".$user["rang"]."</strong></p>";
 				echo "<form><a class='btn btn-danger' value='Reserver une place' href='place_dispo.php' />Reserver une place</a></form>";
