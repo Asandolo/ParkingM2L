@@ -29,7 +29,7 @@ if (isset($_POST["activate"])) {
 	$deladm->execute(array($_POST["id"]));
 }
 
-if (isset($_POST["sup"])) {
+if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 	
 	$deladm = $bdd->prepare("DELETE FROM `membre` WHERE `id_membre` = ?");
 	$deladm->execute(array($_POST["id"]));
@@ -184,6 +184,10 @@ if (isset($_POST["sup"])) {
 											<form method="POST">
 												<input type="hidden" name="id" value="<?php echo $nonverif["id_membre"]; ?>">
 												<input type="submit" name="activate" value="Activer" class="btn btn-success">
+											</form>
+											<form method="POST">
+												<input type="hidden" name="id" value="<?php echo $nonverif["id_membre"]; ?>">
+												<input type="submit" name="refu" value="Refuser" class="btn btn-danger">
 											</form>
 											<a href="modif_admin.php?id=<?php echo $nonverif["id_membre"]; ?>"><button class="btn btn-success">Mofifier</button></a>
 										</td>
