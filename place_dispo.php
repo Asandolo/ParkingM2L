@@ -53,7 +53,7 @@ if ($user['rang']>0)
   <?php
 }
 
-if ($havePlace == 0 && $rangUser == 0) 
+if ($havePlace == 0) 
 {
 	if(isset($_POST['reserver']))
 	{
@@ -161,17 +161,25 @@ if ($havePlace == 0 && $rangUser == 0)
 //-----------------------------------------------------------
       		if (empty($placeDispo)) 
       		{
-      			$countRang=$bdd->prepare("SELECT rang FROM MEMBRE ORDER BY rang");
-      			$countRang->execute();
-      			$attribution=0;
-      			while ($donneeCRang = $countRang->fetch()) 
-      			{
-          			$attribution = $donneeCRang['rang']+1;
-      			}
-        		echo $attribution;
-      		
-        		$attribRang = $bdd->prepare("UPDATE MEMBRE SET rang = ? WHERE id_membre= ?");
-        		$attribRang -> execute(array($attribution,$user['id_membre']));
+            if($user['rang']==0)
+            {
+      			   $countRang=$bdd->prepare("SELECT rang FROM MEMBRE ORDER BY rang");
+      			   $countRang->execute();
+      			   $attribution=0;
+      			   while ($donneeCRang = $countRang->fetch()) 
+      			   {
+          	   		$attributionRang = $donneeCRang['rang']+1;
+      			   }
+        		    echo $attribution;
+      		    
+        		    $attribRang = $bdd->prepare("UPDATE MEMBRE SET rang = ? WHERE id_membre= ?");
+        		    $attribRang -> execute(array($attributionRang,$user['id_membre']));
+                echo "<h2>Le rang N°".$attributionRangrang." de la file d'attente vous à été attribué du fait du manque de place</h2>";
+            }
+            else
+            {
+              echo"<h2>Aucune place disponnible pour cette periode, vous conservez votre Rang</h2>";
+            }
       		}
       		else
       		{
@@ -192,6 +200,14 @@ if ($havePlace == 0 && $rangUser == 0)
       		  	}
       		  	$insertResa = $bdd->prepare("INSERT INTO RESERVER VALUES (?,?,?,?)");
       		  	$insertResa->execute(array($fin_resa,$user['id_membre'],$placeDispo[0],$debut_resa));
+              if ($user['rang']!=0) 
+              {
+                  $ResetRang = $bdd->prepare("UPDATE MEMBRE SET rang = 0 WHERE id_membre= ?");
+                  $ResetRang -> execute(array($user['id_membre']));
+
+                  $FileDAtente = $bdd->prepare("UPDATE MEMBRE SET rang = rang-1 WHERE rang>? ORDER BY rang");
+                  $FileDAtente->execute(array($user['rang']));
+              }
       		}
 		}
 	}

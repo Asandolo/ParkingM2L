@@ -28,6 +28,7 @@ include("includes/pages/header.php");
 				echo "<p style='font-size:20px'>Vous avez la place : <br /><strong>".$place["num_place"]."</strong></p>";
 			}else{
 				echo "<p style='font-size:20px'>Vous avez le rang : <br /><strong>".$user["rang"]."</strong></p>";
+				echo "<form><a class='btn btn-danger' value='Reserver une place' href='place_dispo.php' />Reserver une place</a></form>";
 			}
 
 
