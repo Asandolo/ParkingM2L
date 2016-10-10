@@ -1,4 +1,4 @@
 <?php
 include('includes/function.php');
-echo hashmdp($_GET["m"]);
+echo "mot de pass: ".hashmdp($_GET["m"]);
  ?>
