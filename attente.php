@@ -245,7 +245,7 @@ if (isset($_POST["moins"])) {
 				if ($crang<1) {
 					?>
 					<tr>
-						<td colspan="4">Pas de memnre avec un rang</td>
+						<td colspan="4">Pas de membre en fil d'attente</td>
 					</tr>
 					<?php
 				}
