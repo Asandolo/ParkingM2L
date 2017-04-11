@@ -10,7 +10,7 @@ if(isset($_POST["conect"]))
   $mail= $_POST["mail"];
   $psw= hashMdp($_POST["psw"]);
 
-  $request = $bdd->prepare("SELECT mail_membre,psw_membre,valide_membre FROM MEMBRE WHERE mail_membre=?");
+  $request = $bdd->prepare("SELECT * FROM membre WHERE mail_membre = ?");
   $request->execute(array($mail));
   $data = $request->fetch();
 
