@@ -15,7 +15,7 @@ include("includes/pages/header.php");
 			$tsajd = strtotime($ajd);   
 
 
-			$places = $bdd->prepare("SELECT* FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place AND id_membre= ? AND date_fin_periode>?");
+			$places = $bdd->prepare("SELECT* FROM place,reserver WHERE place.id_place = reserver.id_place AND id_membre= ? AND date_fin_periode>?");
 			$places->execute(array($user["id_membre"],$ajd));
 			$place = $places->fetch();
 
@@ -52,7 +52,7 @@ include("includes/pages/header.php");
 				<?php
 				$aujourdhui = date("Y-m-d");
 				$tsajd = strtotime($aujourdhui);
-				$historique = $bdd->prepare("SELECT RESERVER.id_membre,RESERVER.id_place,num_place,date_debut_periode,date_fin_periode FROM MEMBRE, PLACE, RESERVER WHERE MEMBRE.id_membre = RESERVER.id_membre AND PLACE.id_place=RESERVER.id_place AND RESERVER.id_membre=? AND RESERVER.date_debut_periode <= ? ORDER BY date_fin_periode DESC LIMIT 0,2");
+				$historique = $bdd->prepare("SELECT reserver.id_membre,reserver.id_place,num_place,date_debut_periode,date_fin_periode FROM membre, place, reserver WHERE membre.id_membre = reserver.id_membre AND place.id_place=reserver.id_place AND reserver.id_membre=? AND reserver.date_debut_periode <= ? ORDER BY date_fin_periode DESC LIMIT 0,2");
 				$historique->execute(array($user['id_membre'],$aujourdhui));
 				?>
 				<table class="table table-bordered">

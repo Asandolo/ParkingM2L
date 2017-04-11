@@ -13,7 +13,7 @@ if ($user["admin_membre"]!=1) {
 		$tsajd = strtotime($aujourdhui);
 		if (isset($_GET["user"]) || !empty($_GET["user"])) {
 			
-			$histusers = $bdd->prepare("SELECT * FROM `RESERVER` AS `r`, `MEMBRE` as `m`, `PLACE` As `p` WHERE `r`.`id_membre` = `m`.`id_membre` AND `p`.`id_place` = `r`.`id_place` AND `r`.`id_membre` = ? AND `r`.`date_debut_periode` <= ? ORDER BY `r`.`date_fin_periode` DESC;");
+			$histusers = $bdd->prepare("SELECT * FROM `reserver` AS `r`, `membre` as `m`, `place` As `p` WHERE `r`.`id_membre` = `m`.`id_membre` AND `p`.`id_place` = `r`.`id_place` AND `r`.`id_membre` = ? AND `r`.`date_debut_periode` <= ? ORDER BY `r`.`date_fin_periode` DESC;");
 			$histusers->execute(array($_GET["user"],$aujourdhui));
 			$hucount=$histusers->rowCount();
 			?>	
@@ -58,7 +58,7 @@ if ($user["admin_membre"]!=1) {
 			<?php
 			//$histusers->closeCursor();
 		}elseif(isset($_GET["place"]) || !empty($_GET["place"])){
-			$histplaces = $bdd->prepare("SELECT * FROM `RESERVER` AS `r`, `MEMBRE` as `m`, `PLACE` As `p` WHERE `r`.`id_membre` = `m`.`id_membre` AND `p`.`id_place` = `r`.`id_place` AND `r`.`id_place` = ?;");
+			$histplaces = $bdd->prepare("SELECT * FROM `reserver` AS `r`, `membre` as `m`, `place` As `p` WHERE `r`.`id_membre` = `m`.`id_membre` AND `p`.`id_place` = `r`.`id_place` AND `r`.`id_place` = ?;");
 			$histplaces->execute(array($_GET["place"]));
 			$hpcount=$histplaces->rowCount();
 			//$histpl->closeCursor();

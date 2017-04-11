@@ -7,7 +7,7 @@ $aujourdhui = date("Y-m-d");
 // VERIFIER QUE L'UTILISATEUR N'A PAS DE PLACE OU DE RANG |
 //--------------------------------------------------------
 
-$checkHavePlace = $bdd->prepare("SELECT* FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place AND id_membre= ? AND date_fin_periode>?");
+$checkHavePlace = $bdd->prepare("SELECT* FROM place,reserver WHERE place.id_place = reserver.id_place AND id_membre= ? AND date_fin_periode>?");
 $checkHavePlace->execute(array($user['id_membre'],$aujourdhui));
 $countHavePlace = $checkHavePlace->rowcount();
 
@@ -76,7 +76,7 @@ if ($havePlace == 0)
 //SELECTION DES PLACES DEJA RESERVE |
 //----------------------------------	
 
-      		$CheckPlace = $bdd->prepare("SELECT num_place,date_debut_periode,date_fin_periode FROM PLACE,RESERVER WHERE PLACE.id_place = RESERVER.id_place");
+      		$CheckPlace = $bdd->prepare("SELECT num_place,date_debut_periode,date_fin_periode FROM place,reserver WHERE place.id_place = reserver.id_place");
       		$CheckPlace->execute(array($fin_resa,$fin_resa,$debut_resa,$debut_resa,$debut_resa,$fin_resa));
       		$i = 0;
       		while($donnee = $CheckPlace->fetch())
@@ -106,8 +106,8 @@ if ($havePlace == 0)
       		
       		$tsajd = strtotime($aujourdhui);
 		
-      		$places = $bdd->prepare("SELECT num_place FROM PLACE WHERE place_active = 1");
-      		$places->execute();
+      		$places = $bdd->prepare("SELECT num_place FROM place WHERE active_place = ?");
+      		$places->execute(array(1));
       		$j=0;
       		while ($donneePlaceDisp = $places->fetch()) 
       		{
@@ -120,7 +120,7 @@ if ($havePlace == 0)
 //----------------------------------------------------------------
       		if(empty($place))
       		{
-      		  $checkPeriode = $bdd->prepare("SELECT* FROM PERIODE");
+      		  $checkPeriode = $bdd->prepare("SELECT* FROM periode");
       		  $checkPeriode ->execute();
       		  $isPeriode= 0;
       		  while ($donneeCheckPer = $checkPeriode->fetch()) 
@@ -132,10 +132,10 @@ if ($havePlace == 0)
       		  }
       		  if($isPeriode!=1)
       		  {
-      		    $insertPer = $bdd->prepare("INSERT INTO PERIODE VALUES (?)");
+      		    $insertPer = $bdd->prepare("INSERT INTO periode VALUES (?)");
       		    $insertPer->execute(array($debut_resa));
       		  }
-      		  $insertResa = $bdd->prepare("INSERT INTO RESERVER VALUES (?,?,?,?)");
+      		  $insertResa = $bdd->prepare("INSERT INTO reserver VALUES (?,?,?,?)");
       		  $insertResa->execute(array($fin_resa,$user['id_membre'],$placeDispo[0],$debut_resa));
       		}
       		else
@@ -162,7 +162,7 @@ if ($havePlace == 0)
       		{
             if($user['rang']==0)
             {
-      			   $countRang=$bdd->prepare("SELECT rang FROM MEMBRE ORDER BY rang");
+      			   $countRang=$bdd->prepare("SELECT rang FROM membre ORDER BY rang");
       			   $countRang->execute();
       			   $attribution=0;
       			   while ($donneeCRang = $countRang->fetch()) 
@@ -171,7 +171,7 @@ if ($havePlace == 0)
       			   }
         		    echo $attribution;
       		    
-        		    $attribRang = $bdd->prepare("UPDATE MEMBRE SET rang = ? WHERE id_membre= ?");
+        		    $attribRang = $bdd->prepare("UPDATE membre SET rang = ? WHERE id_membre= ?");
         		    $attribRang -> execute(array($attributionRang,$user['id_membre']));
                 echo "<h2>Le rang N°".$attributionRangrang." de la file d'attente vous à été attribué du fait du manque de place</h2>";
             }
@@ -182,7 +182,7 @@ if ($havePlace == 0)
       		}
       		else
       		{
-      		  	$checkPeriode = $bdd->prepare("SELECT* FROM PERIODE");
+      		  	$checkPeriode = $bdd->prepare("SELECT* FROM periode");
       		  	$checkPeriode ->execute();
       		  	$isPeriode= 0;
       		  	while ($donneeCheckPer = $checkPeriode->fetch()) 
@@ -194,17 +194,17 @@ if ($havePlace == 0)
       		  	}
       		  	if($isPeriode!=1)
       		  	{
-      		  	  $insertPer = $bdd->prepare("INSERT INTO PERIODE VALUES (?)");
+      		  	  $insertPer = $bdd->prepare("INSERT INTO periode VALUES (?)");
       		  	  $insertPer->execute(array($debut_resa));
       		  	}
-      		  	$insertResa = $bdd->prepare("INSERT INTO RESERVER VALUES (?,?,?,?)");
+      		  	$insertResa = $bdd->prepare("INSERT INTO reserver VALUES (?,?,?,?)");
       		  	$insertResa->execute(array($fin_resa,$user['id_membre'],$placeDispo[0],$debut_resa));
               if ($user['rang']!=0) 
               {
-                  $ResetRang = $bdd->prepare("UPDATE MEMBRE SET rang = 0 WHERE id_membre= ?");
+                  $ResetRang = $bdd->prepare("UPDATE membre SET rang = 0 WHERE id_membre= ?");
                   $ResetRang -> execute(array($user['id_membre']));
 
-                  $FileDAtente = $bdd->prepare("UPDATE MEMBRE SET rang = rang-1 WHERE rang>? ORDER BY rang");
+                  $FileDAtente = $bdd->prepare("UPDATE membre SET rang = rang-1 WHERE rang>? ORDER BY rang");
                   $FileDAtente->execute(array($user['rang']));
               }
       		}

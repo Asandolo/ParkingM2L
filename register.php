@@ -26,7 +26,7 @@ if(isset($_POST['enregistrer']))
   $hashpsw = hashMdp($psw);
   
   
-  $verif=$bdd->prepare("SELECT mail_membre FROM MEMBRE WHERE mail_membre=?");
+  $verif=$bdd->prepare("SELECT mail_membre FROM membre WHERE mail_membre=?");
   $verif->execute(array($mail));
   $count=$verif->rowCount();
 

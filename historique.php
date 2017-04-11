@@ -14,8 +14,8 @@ include("includes/pages/header.php");
 				<?php
 				$aujourdhui = date("Y-m-d");
 				$tsajd = strtotime($aujourdhui);
-				$historique = $bdd->prepare("SELECT RESERVER.id_membre,RESERVER.id_place,num_place,date_debut_periode,date_fin_periode FROM MEMBRE, PLACE, RESERVER WHERE MEMBRE.id_membre = RESERVER.id_membre AND PLACE.id_place=RESERVER.id_place AND RESERVER.id_membre=? AND RESERVER.date_debut_periode <= ? ORDER BY date_fin_periode DESC");
-				$historique->execute(array($user['id_membre'],$aujourdhui));
+				$historique = $bdd->prepare("SELECT reserver.id_membre,reserver.id_place,num_place,date_debut_periode,date_fin_periode FROM membre, place, reserver WHERE membre.id_membre = reserver.id_membre AND place.id_place=reserver.id_place AND reserver.id_membre=? AND reserver.date_debut_periode <= ? ORDER BY date_fin_periode DESC");
+				$historique->execute(array($user['id_membre'],$aujourdhui));s
 				?>
 				<table class="table table-bordered">
 					<tr>

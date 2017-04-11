@@ -9,7 +9,7 @@ if (isset($_POST["repsw"])) {
 	$newpsw = htmlspecialchars($_POST["newpsw"]);
 	$cknewpsw = htmlspecialchars($_POST["cknewpsw"]);
 
-	$verif =$bdd->prepare("SELECT psw_membre FROM MEMBRE WHERE mail_membre = ?");
+	$verif =$bdd->prepare("SELECT psw_membre FROM membre WHERE mail_membre = ?");
 	$verif->execute(array($user["mail_membre"]));
 	$v=$verif->fetch();
 
@@ -21,7 +21,7 @@ if (isset($_POST["repsw"])) {
 			
 			$newpsw = hashMdp($newpsw);
 
-			$updatepsw = $bdd->prepare("UPDATE MEMBRE SET psw_membre = ?");
+			$updatepsw = $bdd->prepare("UPDATE membre SET psw_membre = ?");
 			$updatepsw->execute(array($newpsw));
 
 		}else{
