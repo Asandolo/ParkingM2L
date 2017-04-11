@@ -46,13 +46,7 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 					<th>Civilite</th>
 					<th>Nom</th>
 					<th>Prenom</th>
-					<th>Date de naissance</th>
-					<th>Adresse</th>
-					<th>Code Postal</th>
-					<th>Ville</th>
 					<th>Place/rang</th>
-					<th>Validé</th>
-					<th>Admin</th>
 					<th>Actions</th>
 				</tr>
 				<?php
@@ -82,10 +76,6 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 							<td><?php echo $admin["civilite_membre"]; ?></td>
 							<td><?php echo $admin["nom_membre"]; ?></td>
 							<td><?php echo $admin["prenom_membre"]; ?></td>
-							<td><?php echo date("d/m/Y", strtotime($admin["date_naiss_membre"])); ?></td>
-							<td><?php echo $admin["adRue_membre"]; ?></td>
-							<td><?php echo $admin["adCP_membre"]; ?></td>
-							<td><?php echo $admin["adVille_membre"]; ?></td>
 							<td><?php
 
 								if ($countadmin<=0 && $admin["rang"]<=0) {
@@ -97,8 +87,6 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 								}
 
 								?></td>
-								<td><?php echo ($admin["valide_membre"] == 1)?"<span style='color:green;'>Oui</span>":"<span style='color:red;'>Non</span>"; ?></td>
-								<td><?php echo ($admin["admin_membre"] == 1)?"<span style='color:green;'>Oui</span>":"<span style='color:red;'>Non</span>"; ?></td>
 								<td>
 									<form method="POST">
 										<input type="hidden" name="id" value="<?php echo $admin["id_membre"]; ?>">
@@ -125,13 +113,6 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 							<th>Civilite</th>
 							<th>Nom</th>
 							<th>Prenom</th>
-							<th>Date de naissance</th>
-							<th>Adresse</th>
-							<th>Code Postal</th>
-							<th>Ville</th>
-							<th>Place/rang</th>
-							<th>Validé</th>
-							<th>Admin</th>
 							<th>Actions</th>
 						</tr>
 						<?php
@@ -209,12 +190,7 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 									<th>Civilite</th>
 									<th>Nom</th>
 									<th>Prenom</th>
-									<th>Date de naissance</th>
-									<th>Adresse</th>
-									<th>Code Postal</th>
-									<th>Ville</th>
 									<th>Place/rang</th>
-									<th>Validé</th>
 									<th>Admin</th>
 									<th>Actions</th>
 								</tr>
@@ -249,10 +225,6 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 											<td><?php echo $verif["civilite_membre"]; ?></td>
 											<td><?php echo $verif["nom_membre"]; ?></td>
 											<td><?php echo $verif["prenom_membre"]; ?></td>
-											<td><?php echo date("d/m/Y", strtotime($verif["date_naiss_membre"])); ?></td>
-											<td><?php echo $verif["adRue_membre"]; ?></td>
-											<td><?php echo $verif["adCP_membre"]; ?></td>
-											<td><?php echo $verif["adVille_membre"]; ?></td>
 											<td><?php 
 
 												if ($countverif<=0 && $verif["rang"]<=0) {
@@ -265,7 +237,6 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 
 
 												?></td>
-												<td><?php echo ($verif["valide_membre"] == 1)?"<span style='color:green;'>Oui</span>":"<span style='color:red;'>Non</span>"; ?></td>
 												<td><?php echo ($verif["admin_membre"] == 1)?"<span style='color:green;'>Oui</span>":"<span style='color:red;'>Non</span>"; ?></td>
 												<td>
 													<form method="POST">
