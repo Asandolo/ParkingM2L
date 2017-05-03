@@ -120,7 +120,7 @@ if ($havePlace == 0)
 //----------------------------------------------------------------
       		if(empty($place))
       		{
-      		  $checkPeriode = $bdd->prepare("SELECT* FROM periode");
+      		  $checkPeriode = $bdd->prepare("SELECT * FROM periode");
       		  $checkPeriode ->execute();
       		  $isPeriode= 0;
       		  while ($donneeCheckPer = $checkPeriode->fetch()) 
