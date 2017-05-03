@@ -55,6 +55,7 @@ if ($user['rang']>0)
 
 if ($havePlace == 0) 
 {
+  
 	if(isset($_POST['reserver']))
 	{
 		$j_deb = $_POST['jour_deb'];
@@ -75,13 +76,13 @@ if ($havePlace == 0)
 //----------------------------------
 //SELECTION DES PLACES DEJA RESERVE |
 //----------------------------------	
-
+          echo "<script type='text/javascript'>alert('lol')</script>";
       		$CheckPlace = $bdd->prepare("SELECT num_place,date_debut_periode,date_fin_periode FROM place,reserver WHERE place.id_place = reserver.id_place");
-      		$CheckPlace->execute(array($fin_resa,$fin_resa,$debut_resa,$debut_resa,$debut_resa,$fin_resa));
+      		$CheckPlace->execute();
       		$i = 0;
       		while($donnee = $CheckPlace->fetch())
       		{
-      		  $place[$i]=null;
+            $place[$i]=null;
       		  if (($donnee['date_debut_periode']<=$fin_resa && $donnee['date_fin_periode']>=$fin_resa)&&($donnee['date_debut_periode']<=$debut_resa && $donnee['date_fin_periode']>=$debut_resa)) 
       		  {
       		    $place[$i]=$donnee['num_place'];
